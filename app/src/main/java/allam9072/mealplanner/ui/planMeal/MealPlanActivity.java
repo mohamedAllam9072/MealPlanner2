@@ -1,4 +1,4 @@
-package allam9072.mealplanner.ui.add_meal;
+package allam9072.mealplanner.ui.planMeal;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,30 +24,21 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.ArrayList;
 import java.util.List;
 
-import allam9072.mealplanner.DB.m_Tables.e_meal;
-import allam9072.mealplanner.DB.m_Tables.e_mealProductCrossRef;
-import allam9072.mealplanner.DB.m_Tables.e_product;
+import allam9072.mealplanner.DB.m_Tables.MealEntity;
+import allam9072.mealplanner.DB.m_Tables.MealProductXRefEntity;
+import allam9072.mealplanner.DB.m_Tables.ProductEntity;
 import allam9072.mealplanner.R;
-import allam9072.mealplanner.ui.add_day.DayPlanActivity;
+import allam9072.mealplanner.ui.planDay.DayPlanActivity;
 
-/**
- * MealPlanActivity Goal
- * <p>
- * OPENED FROM : DayPlanActivity
- * ENDED TO    : DayPlanActivity
- * INPUT       : day_id
- * OUTPUT      : day_id and meals(breakfast,lunch,....)
- */
 
 public class MealPlanActivity extends AppCompatActivity implements MealPlanAdapter.click_interface {
-    private RecyclerView rv_products;
-    private RecyclerView rv_selected_products;
-    private ArrayList<e_product> selectedProductsList = new ArrayList<>();
-    private MealPlanAdapter mealPlanAdapter;
-    private MealPlanNestedAdapter mealPlanNestedAdapter;
+    private RecyclerView rv_products, rv_selected_products;
+    private ArrayList<ProductEntity> SelectedProductsList = new ArrayList<>();
+    private MealPlanAdapter MainAdapter;
+    private MealPlanNestedAdapter NestedAdapter;
     private MealPlanViewModel viewModel;
-    String mealTitle;
-    private int receivedMealId;
+    private String mealTitle;
+    private int MealId;
     private int product_id_catch;
     private String list;
 
@@ -61,10 +51,10 @@ public class MealPlanActivity extends AppCompatActivity implements MealPlanAdapt
         init();
 
         viewModel = new ViewModelProvider(this).get(MealPlanViewModel.class);
-        viewModel.getAllProducts().observe(this, new Observer<List<e_product>>() {
+        viewModel.getAllProducts().observe(this, new Observer<List<ProductEntity>>() {
             @Override
-            public void onChanged(List<e_product> e_products) {
-                mealPlanAdapter.setProducts(e_products);
+            public void onChanged(List<ProductEntity> products) {
+                MainAdapter.setProducts(products);
             }
         });
     }
@@ -74,13 +64,13 @@ public class MealPlanActivity extends AppCompatActivity implements MealPlanAdapt
         // rv_products
         rv_products = findViewById(R.id.rv_meal_products);
         rv_products.setLayoutManager(new StaggeredGridLayoutManager(6, 0));
-        mealPlanAdapter = new MealPlanAdapter(this);
-        rv_products.setAdapter(mealPlanAdapter);
+        MainAdapter = new MealPlanAdapter(this);
+        rv_products.setAdapter(MainAdapter);
         // rv_selected_products
         rv_selected_products = findViewById(R.id.rv_selected_products);
         rv_selected_products.setLayoutManager(new GridLayoutManager(this, 3));
-        mealPlanNestedAdapter = new MealPlanNestedAdapter(getApplicationContext(), selectedProductsList);
-        rv_selected_products.setAdapter(mealPlanNestedAdapter);
+        NestedAdapter = new MealPlanNestedAdapter(getApplicationContext(), SelectedProductsList);
+        rv_selected_products.setAdapter(NestedAdapter);
         // add new product
         FloatingActionButton btnAddProduct = findViewById(R.id.btn_add_product);
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
@@ -93,14 +83,13 @@ public class MealPlanActivity extends AppCompatActivity implements MealPlanAdapt
 
     private void open_intent_from_meal_item_rv() {
         Intent intent = getIntent();
-        String week_name = intent.getStringExtra("item1_week_name");
-        String day_name = intent.getStringExtra("item2_day_name");
-        String meal_name = intent.getStringExtra("item3_meal_name");
-        receivedMealId = intent.getIntExtra("item4_meal_id", 0);
-        Toast.makeText(this, week_name + " " + day_name + " " + meal_name + "\n" + receivedMealId, Toast.LENGTH_SHORT).show();
+        MealId = intent.getIntExtra("mealId", 0);
+        String day_name = intent.getStringExtra("mealName");
+        SelectedProductsList = intent.getParcelableArrayListExtra("arrayList");
+        Toast.makeText(this, MealId + " " + day_name + " " + "\n", Toast.LENGTH_SHORT).show();
     }
 
-//    private void getIntentFormParent() {
+    //    private void getIntentFormParent() {
 //        Intent Received_intent = getIntent();
 //        if (Received_intent.hasExtra("meal_id")) {
 //            mealTitle = Received_intent.getStringExtra("mealTitle");
@@ -114,7 +103,6 @@ public class MealPlanActivity extends AppCompatActivity implements MealPlanAdapt
 //        }
 //
 //    }
-
     private void SaveMeal() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         View view = getLayoutInflater().inflate(R.layout.dialog_meal_done, null);
@@ -125,8 +113,8 @@ public class MealPlanActivity extends AppCompatActivity implements MealPlanAdapt
             list = getSupportActionBar().getTitle().toString() + "\n";
         }
 
-        for (int i = 0; i < selectedProductsList.size(); i++) {
-            list += selectedProductsList.get(i).getProduct_name() + "\t\t";
+        for (int i = 0; i < SelectedProductsList.size(); i++) {
+            list += SelectedProductsList.get(i).getProduct_name() + "\t\t";
         }
         textView.setText(list);
         builder.setView(view)
@@ -135,8 +123,8 @@ public class MealPlanActivity extends AppCompatActivity implements MealPlanAdapt
                     public void onClick(DialogInterface dialog, int which) {
                         Intent resultsIntent = new Intent(getApplicationContext(), DayPlanActivity.class);
                         resultsIntent.putExtra("mealTitle", mealTitle);
-                        resultsIntent.putParcelableArrayListExtra("PList", selectedProductsList);
-                        viewModel.insert_meal(new e_meal(getTitle().toString(), getTitle().toString()));
+                        resultsIntent.putParcelableArrayListExtra("PList", SelectedProductsList);
+                        viewModel.insert_meal(new MealEntity(getTitle().toString(), getTitle().toString()));
                         setResult(RESULT_OK, resultsIntent);
                         finish();
                     }
@@ -181,11 +169,11 @@ public class MealPlanActivity extends AppCompatActivity implements MealPlanAdapt
                     public void onClick(DialogInterface dialog, int which) {
                         String s = editText.getText().toString();
                         //Todo : edit e_product(s,10,10) with real values
-                        e_product e_product_main = new e_product(s, 10, 10);
-                        viewModel.insert_product(e_product_main);
+                        ProductEntity product_main = new ProductEntity(s, 10, 10);
+                        viewModel.insert_product(product_main);
 //                        selectedProductsList.add(e_product_main);
 //                        rv_selected_products.setAdapter(mealPlanNestedAdapter);
-                        product_id_catch = e_product_main.get_id_product();
+                        product_id_catch = product_main.getProductId();
                         //    Toast.makeText(MealPlanActivity.this, String.valueOf(receivedMealId) + " " + product_id_catch, Toast.LENGTH_SHORT).show();
 
 
@@ -225,14 +213,17 @@ public class MealPlanActivity extends AppCompatActivity implements MealPlanAdapt
 
     @Override
     public void click(int position) {
+        int ProductId = viewModel.getAllProducts().getValue().get(position).getProductId();
+        if (viewModel.getAllProducts().getValue().get(position).equals(SelectedProductsList.get(position))) {
+            viewModel.getAllProducts().getValue().remove(position);
+            return;
+        } else {
+            SelectedProductsList.add(viewModel.getAllProducts().getValue().get(position));
+            viewModel.insert_meal_product(new MealProductXRefEntity(MealId, ProductId));
+            rv_selected_products.setAdapter(NestedAdapter);
+        }
 
-        selectedProductsList.add(viewModel.getAllProducts().getValue().get(position));
-        int receiveProductId = viewModel.getAllProducts().getValue().get(position).get_id_product();
-        Toast.makeText(this, String.valueOf(receiveProductId), Toast.LENGTH_SHORT).show();
-        viewModel.insert_meal_product(new e_mealProductCrossRef(receivedMealId, receiveProductId));
 
-
-        rv_selected_products.setAdapter(mealPlanNestedAdapter);
     }
 
 

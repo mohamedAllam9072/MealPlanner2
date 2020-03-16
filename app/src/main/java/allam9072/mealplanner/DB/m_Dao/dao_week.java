@@ -10,19 +10,27 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import allam9072.mealplanner.DB.m_Tables.e_week;
+import allam9072.mealplanner.DB.m_Tables.WeekDaysXRefEntity;
+import allam9072.mealplanner.DB.m_Tables.WeekEntity;
 
 @Dao
 public interface dao_week {
     @Insert
-    void insert(e_week e_week);
+    void insert(WeekEntity e_week);
 
     @Update
-    void update(e_week e_week);
+    void update(WeekEntity e_week);
 
     @Delete
-    void delete(e_week e_week);
+    void delete(WeekEntity e_week);
 
-    @Query("Select * From e_week")
-    LiveData<List<e_week>> getAllWeeks();
+    @Query("Select * From WeekEntity")
+    LiveData<List<WeekEntity>> getAllWeeks();
+
+    @Transaction
+    @Query("SELECT * FROM WeekEntity")
+    LiveData<List<WeekEntity>> getWeekDays();
+
+    @Insert
+    void insertWeekDays(WeekDaysXRefEntity weekDaysXRefEntity);
 }

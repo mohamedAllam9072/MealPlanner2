@@ -10,22 +10,29 @@ import androidx.room.Update;
 
 import java.util.List;
 
-import allam9072.mealplanner.DB.m_Tables.e_day;
+import allam9072.mealplanner.DB.m_Tables.DayEntity;
+import allam9072.mealplanner.DB.m_Tables.DayMealsXRefEntity;
+import allam9072.mealplanner.DB.m_Tables.DayMealsRelation;
 
 @Dao
 public interface dao_day {
     @Insert
-    void insert(e_day e_day);
+    void insert(DayEntity dayEntity);
 
     @Update
-    void update(e_day e_day);
+    void update(DayEntity dayEntity);
 
     @Delete
-    void delete(e_day e_day);
+    void delete(DayEntity dayEntity);
 
-    @Query("Select * From e_day")
-    LiveData<List<e_day>> getAllDays();
+    @Query("Select * From DayEntity")
+    LiveData<List<DayEntity>> getAllDays();
 
+    @Transaction
+    @Query("select * From DayEntity")
+    LiveData<List<DayMealsRelation>> getDayMeals();
+    @Insert
+    void insertDayMeals(DayMealsXRefEntity dayMealsXRefEntity);
 
 
 }

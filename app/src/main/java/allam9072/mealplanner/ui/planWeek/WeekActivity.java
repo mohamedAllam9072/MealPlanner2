@@ -1,4 +1,4 @@
-package allam9072.mealplanner.ui.add_week;
+package allam9072.mealplanner.ui.planWeek;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
@@ -26,13 +26,10 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-import allam9072.mealplanner.DB.m_Tables.e_day;
-import allam9072.mealplanner.DB.m_Tables.e_meal;
-import allam9072.mealplanner.DB.m_Tables.e_product;
-import allam9072.mealplanner.DB.m_Tables.r_meal_products;
+import allam9072.mealplanner.DB.m_Tables.DayEntity;
+import allam9072.mealplanner.DB.m_Tables.MealProductsRelation;
 import allam9072.mealplanner.R;
-import allam9072.mealplanner.ui.add_day.DayPlanActivity;
-import allam9072.mealplanner.ui.add_meal.MealPlanActivity;
+import allam9072.mealplanner.ui.planDay.DayPlanActivity;
 
 /**
  * Activity Goal
@@ -70,33 +67,40 @@ public class WeekActivity extends AppCompatActivity implements DatePickerDialog.
         setContentView(R.layout.activity_week_plan);
         adapter = new WeekAdapter(getApplicationContext());
         viewModel = new ViewModelProvider(this).get(WeekViewModel.class);
-        viewModel.getDays().observe(this, new Observer<List<e_day>>() {
+        viewModel.getDays().observe(this, new Observer<List<DayEntity>>() {
             @Override
-            public void onChanged(List<e_day> days) {
+            public void onChanged(List<DayEntity> days) {
                 adapter.setDays(days);
             }
         });
-        viewModel.getMeals().observe(this, new Observer<List<e_meal>>() {
+//        viewModel.getMeals().observe(this, new Observer<List<e_meal>>() {
+//            @Override
+//            public void onChanged(List<e_meal> e_meals) {
+//                adapter.setMeals(e_meals);
+//            }
+//        });
+//        viewModel.getDay_meals().observe(this, new Observer<List<r_day_meals>>() {
+//            @Override
+//            public void onChanged(List<r_day_meals> r_day_meals) {
+//                adapter.setDay_meals(r_day_meals);
+//            }
+//        });
+        viewModel.getMeal_products().observe(this, new Observer<List<MealProductsRelation>>() {
             @Override
-            public void onChanged(List<e_meal> e_meals) {
-                adapter.setMeals(e_meals);
+            public void onChanged(List<MealProductsRelation> mealProducts) {
+                adapter.setMeal_products(mealProducts);
             }
         });
-        viewModel.getProductsWithMeal().observe(this, new Observer<List<e_product>>() {
-            @Override
-            public void onChanged(List<e_product> e_products) {
-                adapter.setProducts(e_products);
-            }
-        });
+
         recyclerView = findViewById(R.id.rv_week_plan);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         adapter.setListener(new WeekAdapter.listener() {
             @Override
-            public void click(e_day day) {
+            public void click(DayEntity day) {
                 Intent intent = new Intent(getApplicationContext(), DayPlanActivity.class);
                 intent.putExtra("dayTitle", day.getDay_name());
-                intent.putExtra("day_id", day.get_id_day());
+                intent.putExtra("day_id", day.getDayId());
                 startActivity(intent);
             }
         });

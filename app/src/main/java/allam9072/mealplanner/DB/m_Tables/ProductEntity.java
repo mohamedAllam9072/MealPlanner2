@@ -3,49 +3,48 @@ package allam9072.mealplanner.DB.m_Tables;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class e_product implements Parcelable {
+public class ProductEntity implements Parcelable {
     @PrimaryKey(autoGenerate = true)
-    private int _id_product;
+    private int productId;
     private String product_name;
     private int product_price;
     private int product_weight;
 
-    public e_product(String product_name, int product_price, int product_weight) {
+    public ProductEntity(String product_name, int product_price, int product_weight) {
         this.product_name = product_name;
         this.product_price = product_price;
         this.product_weight = product_weight;
     }
 
-    protected e_product(Parcel in) {
-        _id_product = in.readInt();
+    protected ProductEntity(Parcel in) {
+        productId = in.readInt();
         product_name = in.readString();
         product_price = in.readInt();
         product_weight = in.readInt();
     }
 
-    public static final Creator<e_product> CREATOR = new Creator<e_product>() {
+    public static final Creator<ProductEntity> CREATOR = new Creator<ProductEntity>() {
         @Override
-        public e_product createFromParcel(Parcel in) {
-            return new e_product(in);
+        public ProductEntity createFromParcel(Parcel in) {
+            return new ProductEntity(in);
         }
 
         @Override
-        public e_product[] newArray(int size) {
-            return new e_product[size];
+        public ProductEntity[] newArray(int size) {
+            return new ProductEntity[size];
         }
     };
 
-    public void set_id_product(int _id_product) {
-        this._id_product = _id_product;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
-    public int get_id_product() {
-        return _id_product;
+    public int getProductId() {
+        return productId;
     }
 
     public String getProduct_name() {
@@ -68,7 +67,7 @@ public class e_product implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(_id_product);
+        dest.writeInt(productId);
         dest.writeString(product_name);
         dest.writeInt(product_price);
         dest.writeInt(product_weight);

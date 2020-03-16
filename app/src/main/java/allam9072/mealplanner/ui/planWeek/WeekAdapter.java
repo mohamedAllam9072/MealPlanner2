@@ -1,4 +1,4 @@
-package allam9072.mealplanner.ui.add_week;
+package allam9072.mealplanner.ui.planWeek;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,19 +15,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import allam9072.mealplanner.DB.m_Tables.e_day;
-import allam9072.mealplanner.DB.m_Tables.e_meal;
-import allam9072.mealplanner.DB.m_Tables.e_product;
-import allam9072.mealplanner.DB.m_Tables.r_meal_products;
+import allam9072.mealplanner.DB.m_Tables.DayEntity;
+import allam9072.mealplanner.DB.m_Tables.DayMealsRelation;
+import allam9072.mealplanner.DB.m_Tables.MealEntity;
+import allam9072.mealplanner.DB.m_Tables.MealProductsRelation;
 import allam9072.mealplanner.R;
-import allam9072.mealplanner.ui.add_meal.MealPlanActivity;
+import allam9072.mealplanner.ui.planMeal.MealPlanActivity;
 
 public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.mVH> {
     private Context context;
-    private List<e_day> days = new ArrayList<>();
-    private List<e_meal> meals = new ArrayList<>();
-  //  private List<r_meal_products> meal_products = new ArrayList<>();
-    private List<e_product>products = new ArrayList<>();
+    private List<DayEntity> days = new ArrayList<>();
+    private List<MealEntity> meals = new ArrayList<>();
+    private List<MealProductsRelation> meal_products = new ArrayList<>();
+    private List<DayMealsRelation> day_meals = new ArrayList<>();
     private listener listener;
 
     public WeekAdapter(Context context) {
@@ -39,7 +38,7 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.mVH> {
     @Override
     public mVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_rv_week, parent, false);
+                .inflate(R.layout.item_rv_day_full, parent, false);
         return new mVH(view);
     }
 
@@ -48,7 +47,8 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.mVH> {
         holder.tv_DayTitle.setText(days.get(position).getDay_name());
         holder.tv_DayDate.setText(days.get(position).getDay_name());
         holder.nested_rv.setLayoutManager(new LinearLayoutManager(context));
-        holder.nested_rv.setAdapter(new NestedAdapter(context,meals, products));
+        holder.nested_rv.setAdapter(
+                new NestedAdapter(context, meal_products));
 
     }
 
@@ -82,7 +82,7 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.mVH> {
     }
 
     public interface listener {
-        void click(e_day day);
+        void click(DayEntity day);
     }
 
     public void setListener(WeekAdapter.listener listener) {
@@ -92,21 +92,21 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.mVH> {
     /**
      * this method refer to observes in Main_activity view_model calling
      */
-    public void setDays(List<e_day> days) {
+    public void setDays(List<DayEntity> days) {
         this.days = days;
         notifyDataSetChanged();
     }
 
-    public void setMeals(List<e_meal> meals) {
+    public void setMeals(List<MealEntity> meals) {
         this.meals = meals;
         notifyDataSetChanged();
     }
 
-    public void setProducts(List<e_product> products) {
-        this.products = products;
+    public void setMeal_products(List<MealProductsRelation> meal_products) {
+        this.meal_products = meal_products;
     }
-    //    public void setProductsWithMeal(List<r_meal_products> meal_products) {
-//        this.meal_products = meal_products;
-//        notifyDataSetChanged();
-//    }
+
+    public void setDay_meals(List<DayMealsRelation> day_meals) {
+        this.day_meals = day_meals;
+    }
 }

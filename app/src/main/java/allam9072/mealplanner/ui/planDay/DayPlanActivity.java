@@ -1,4 +1,4 @@
-package allam9072.mealplanner.ui.add_day;
+package allam9072.mealplanner.ui.planDay;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,16 +16,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import allam9072.mealplanner.DB.m_Tables.e_meal;
-import allam9072.mealplanner.DB.m_Tables.e_product;
+import allam9072.mealplanner.DB.m_Tables.MealEntity;
+import allam9072.mealplanner.DB.m_Tables.ProductEntity;
 import allam9072.mealplanner.R;
-import allam9072.mealplanner.ui.add_meal.MealPlanActivity;
+import allam9072.mealplanner.ui.planMeal.MealPlanActivity;
 
 public class DayPlanActivity extends AppCompatActivity {
     private DayPlanAdapter adapter = new DayPlanAdapter();
     private DayPlanViewModel viewModel;
     private RecyclerView recyclerView;
-    private ArrayList<e_product> received_productList;
+    private ArrayList<ProductEntity> received_productList;
     private int receivedDayId;
     private static final int REQUEST_CODE_INSERT = 1;
     private static final int REQUEST_CODE_UPDATE = 2;
@@ -36,10 +36,10 @@ public class DayPlanActivity extends AppCompatActivity {
         setContentView(R.layout.activity_day_plan);
         init();
         viewModel = new ViewModelProvider(this).get(DayPlanViewModel.class);
-        viewModel.getAllMeals().observe(this, new Observer<List<e_meal>>() {
+        viewModel.getAllMeals().observe(this, new Observer<List<MealEntity>>() {
             @Override
-            public void onChanged(List<e_meal> e_meals) {
-                adapter.setMeals(e_meals);
+            public void onChanged(List<MealEntity> MealEntities) {
+                adapter.setMeals(MealEntities);
             }
         });
 //        viewModel.getAllProductsWithMeal().observe(this, new Observer<List<r_productsWithMeal>>() {
@@ -50,16 +50,16 @@ public class DayPlanActivity extends AppCompatActivity {
 //        });
         adapter.setListener(new DayPlanAdapter.listener() {
             @Override
-            public void click(e_meal meal) {
+            public void click(MealEntity meal) {
                 Intent intent = new Intent(getApplicationContext(), MealPlanActivity.class);
                 if (received_productList != null) {
                     intent.putExtra("mealTitle", meal.getMeal_name());
-                    intent.putExtra("meal_id", meal.get_id_meal());
+                    intent.putExtra("meal_id", meal.getMealId());
                     intent.putParcelableArrayListExtra("RPList", received_productList);
                     Toast.makeText(DayPlanActivity.this, "RPList sent", Toast.LENGTH_SHORT).show();
                 } else {
                     intent.putExtra("mealTitle", meal.getMeal_name());
-                    intent.putExtra("meal_id", meal.get_id_meal());
+                    intent.putExtra("meal_id", meal.getMealId());
                 }
                 startActivityForResult(intent, REQUEST_CODE_INSERT);
             }
@@ -131,7 +131,7 @@ public class DayPlanActivity extends AppCompatActivity {
             for (int i = 0; i < received_productList.size(); i++) {
                 listString += received_productList.get(i).getProduct_name();
             }
-            viewModel.InsertMeal(new e_meal(mealTitle, listString));
+            viewModel.InsertMeal(new MealEntity(mealTitle, listString));
             Toast.makeText(this, mealTitle + " - " + listString, Toast.LENGTH_SHORT).show();
 
 

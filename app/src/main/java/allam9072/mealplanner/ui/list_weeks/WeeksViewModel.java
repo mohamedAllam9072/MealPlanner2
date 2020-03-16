@@ -7,27 +7,27 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-import allam9072.mealplanner.DB.m_Repository;
-import allam9072.mealplanner.DB.m_Tables.e_week;
+import allam9072.mealplanner.DB.Repo;
+import allam9072.mealplanner.DB.m_Tables.WeekEntity;
 
 public class WeeksViewModel extends AndroidViewModel {
 
-    private LiveData<List<e_week>> AllWeeks;
-    private m_Repository repository;
+    private LiveData<List<WeekEntity>> AllWeeks;
+    private Repo repository;
 
     public WeeksViewModel(Application application) {
         super(application);
-        repository = new m_Repository(application);
+        repository = new Repo(application);
         AllWeeks = repository.getAllWeeks();
 
 
     }
 
-    void insert_week(e_week e_week) {
-        repository.insert_week(e_week);
+    void insert_week(WeekEntity WeekEntity) {
+        repository.insert_week(WeekEntity);
     }
 
-    public LiveData<List<e_week>> getAllWeeks() {
+    public LiveData<List<WeekEntity>> getAllWeeks() {
         return AllWeeks;
     }
 }

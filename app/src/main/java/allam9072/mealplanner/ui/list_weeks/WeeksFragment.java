@@ -16,10 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import allam9072.mealplanner.DB.m_Tables.e_week;
+import allam9072.mealplanner.DB.m_Tables.WeekEntity;
 import allam9072.mealplanner.R;
 import allam9072.mealplanner.TempActivity;
-import allam9072.mealplanner.ui.add_week.WeekActivity;
+import allam9072.mealplanner.ui.planWeek.WeekActivity;
 
 public class WeeksFragment extends Fragment {
     private WeeksViewModel viewModel;
@@ -35,10 +35,10 @@ public class WeeksFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
         viewModel = new ViewModelProvider(this).get(WeeksViewModel.class);
-        viewModel.getAllWeeks().observe(getViewLifecycleOwner(), new Observer<List<e_week>>() {
+        viewModel.getAllWeeks().observe(getViewLifecycleOwner(), new Observer<List<WeekEntity>>() {
             @Override
-            public void onChanged(List<e_week> e_weeks) {
-                adapter.setWeeks(e_weeks);
+            public void onChanged(List<WeekEntity> WeekEntities) {
+                adapter.setWeeks(WeekEntities);
             }
         });
 
@@ -52,9 +52,9 @@ public class WeeksFragment extends Fragment {
         });
         adapter.setListener(new WeeksAdapter.listener() {
             @Override
-            public void click(e_week week) {
+            public void click(WeekEntity week) {
                 Intent intent = new Intent(getContext(), TempActivity.class);
-                intent.putExtra("week_id", week.get_id_week());
+                intent.putExtra("week_id", week.getWeekId());
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getActivity().startActivity(intent);
             }

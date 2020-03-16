@@ -1,4 +1,4 @@
-package allam9072.mealplanner.ui.add_week;
+package allam9072.mealplanner.ui.planWeek;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;

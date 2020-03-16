@@ -9,11 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
-import allam9072.mealplanner.DB.m_Tables.e_week;
+
+import allam9072.mealplanner.DB.m_Tables.WeekEntity;
 import allam9072.mealplanner.R;
 
 public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.mVH> {
-    private List<e_week> weeksList = new ArrayList<>();
+    private List<WeekEntity> weeksList = new ArrayList<>();
     private listener listener;
 
 
@@ -35,7 +36,7 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.mVH> {
     /**
      * this method refer to observes in Main_activity view_model calling
      */
-    public void setWeeks(List<e_week> weeks) {
+    public void setWeeks(List<WeekEntity> weeks) {
         this.weeksList = weeks;
         notifyDataSetChanged();
     }
@@ -62,12 +63,12 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.mVH> {
         }
     }
 
-    public e_week getWeekAt(int position) {
+    public WeekEntity getWeekAt(int position) {
         return weeksList.get(position);
     }
 
     public interface listener {
-        void click(e_week week);
+        void click(WeekEntity week);
     }
 
     public void setListener(WeeksAdapter.listener listener) {

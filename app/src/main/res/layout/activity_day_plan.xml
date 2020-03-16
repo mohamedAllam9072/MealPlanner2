@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".ui.add_day.DayPlanActivity">
+    tools:context=".ui.planDay.DayPlanActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_create_meal"

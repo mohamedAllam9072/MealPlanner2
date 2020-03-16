@@ -1,4 +1,4 @@
-package allam9072.mealplanner;
+package allam9072.mealplanner.ui.mainActivity;
 
 import android.os.Bundle;
 
@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+
+import allam9072.mealplanner.R;
 
 public class MainActivity extends AppCompatActivity {
 

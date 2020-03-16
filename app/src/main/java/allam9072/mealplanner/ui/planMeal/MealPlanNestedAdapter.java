@@ -1,4 +1,4 @@
-package allam9072.mealplanner.ui.add_meal;
+package allam9072.mealplanner.ui.planMeal;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,15 +14,15 @@ import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
 
-import allam9072.mealplanner.DB.m_Tables.e_product;
+import allam9072.mealplanner.DB.m_Tables.ProductEntity;
 import allam9072.mealplanner.R;
 import allam9072.mealplanner.ui.view_product_profile.ProductProfileActivity;
 
 public class MealPlanNestedAdapter extends RecyclerView.Adapter<MealPlanNestedAdapter.mVH> {
-    private List<e_product> selectedProductsList;
+    private List<ProductEntity> selectedProductsList;
     private Context context;
 
-    public MealPlanNestedAdapter(Context context, List<e_product> selectedProductsList) {
+    public MealPlanNestedAdapter(Context context, List<ProductEntity> selectedProductsList) {
         this.selectedProductsList = selectedProductsList;
         this.context = context;
     }
@@ -30,7 +30,7 @@ public class MealPlanNestedAdapter extends RecyclerView.Adapter<MealPlanNestedAd
     @NonNull
     @Override
     public mVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rv_product, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_rv_product_name, parent, false);
         return new mVH(view);
     }
 

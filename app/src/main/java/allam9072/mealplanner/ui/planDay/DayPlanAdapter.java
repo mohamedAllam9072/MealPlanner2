@@ -1,4 +1,4 @@
-package allam9072.mealplanner.ui.add_day;
+package allam9072.mealplanner.ui.planDay;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import allam9072.mealplanner.DB.m_Tables.e_meal;
+import allam9072.mealplanner.DB.m_Tables.MealEntity;
 import allam9072.mealplanner.R;
 
 public class DayPlanAdapter extends RecyclerView.Adapter<DayPlanAdapter.mVH> {
-    private List<e_meal> meals = new ArrayList<>();
+    private List<MealEntity> meals = new ArrayList<>();
 
     private listener listener;
 
@@ -63,7 +63,7 @@ public class DayPlanAdapter extends RecyclerView.Adapter<DayPlanAdapter.mVH> {
     }
 
     public interface listener {
-        void click(e_meal e_meal);
+        void click(MealEntity MealEntity);
     }
 
     public void setListener(DayPlanAdapter.listener listener) {
@@ -73,14 +73,14 @@ public class DayPlanAdapter extends RecyclerView.Adapter<DayPlanAdapter.mVH> {
     /**
      * this method refer to observes in Main_activity view_model calling
      */
-    public void setMeals(List<e_meal> e_meals) {
-        this.meals = e_meals;
+    public void setMeals(List<MealEntity> MealEntities) {
+        this.meals = MealEntities;
         notifyDataSetChanged();
     }
 
 
 
-    public e_meal getMealAt(int position) {
+    public MealEntity getMealAt(int position) {
         return meals.get(position);
     }
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="8dp"
-    tools:context=".ui.add_meal.MealPlanActivity">
+    tools:context=".ui.planMeal.MealPlanActivity">
 
 
     <com.google.android.material.card.MaterialCardView
@@ -50,7 +50,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_sp"
                 tools:itemCount="4"
-                tools:listitem="@layout/item_rv_product" />
+                tools:listitem="@layout/item_rv_product_name" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -64,7 +64,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/v2"
-        tools:listitem="@layout/item_rv_product" />
+        tools:listitem="@layout/item_rv_product_name" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_add_product"

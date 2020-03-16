@@ -4,24 +4,24 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class e_week {
+public class WeekEntity {
     @PrimaryKey(autoGenerate = true)
-    private int _id_week;
+    private int weekId;
     private String week_name;
 
-    public e_week(String week_name) {
+    public WeekEntity(String week_name) {
         this.week_name = week_name;
     }
 
-    public int get_id_week() {
-        return _id_week;
+    public int getWeekId() {
+        return weekId;
     }
 
     public String getWeek_name() {
         return week_name;
     }
 
-    public void set_id_week(int _id_week) {
-        this._id_week = _id_week;
+    public void setWeekId(int weekId) {
+        this.weekId = weekId;
     }
 }

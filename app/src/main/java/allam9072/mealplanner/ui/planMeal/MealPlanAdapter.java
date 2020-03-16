@@ -1,4 +1,4 @@
-package allam9072.mealplanner.ui.add_meal;
+package allam9072.mealplanner.ui.planMeal;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import allam9072.mealplanner.DB.m_Tables.e_product;
+import allam9072.mealplanner.DB.m_Tables.ProductEntity;
 import allam9072.mealplanner.R;
 
 public class MealPlanAdapter extends RecyclerView.Adapter<MealPlanAdapter.mVH> {
-    private List<e_product> list1 = new ArrayList<>();
+    private List<ProductEntity> list1 = new ArrayList<>();
     //   private List<e_product> list2 ;
     private click_interface click_interface;
 
@@ -28,7 +28,7 @@ public class MealPlanAdapter extends RecyclerView.Adapter<MealPlanAdapter.mVH> {
     @Override
     public mVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_rv_product, parent, false);
+                .inflate(R.layout.item_rv_product_name, parent, false);
         return new mVH(view, click_interface);
     }
 
@@ -69,7 +69,7 @@ public class MealPlanAdapter extends RecyclerView.Adapter<MealPlanAdapter.mVH> {
     /**
      * this method refer to observes in Main_activity view_model calling
      */
-    public void setProducts(List<e_product> products) {
+    public void setProducts(List<ProductEntity> products) {
         this.list1 = products;
         notifyDataSetChanged();
     }
