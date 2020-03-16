@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="allam9072.mealplanner.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_weeks"
+        android:name="allam9072.mealplanner.ui.list_weeks.WeeksFragment"
+        android:label="@string/menu_weeks"
+        tools:layout="@layout/fragment_weeks" />
+
+    <fragment
+        android:id="@+id/nav_shoppingList"
+        android:name="allam9072.mealplanner.ui.list_shopping.ShoppingListFragment"
+        android:label="@string/menu_shopping_list"
+        tools:layout="@layout/fragment_shopping_list" />
+
+    <fragment
+        android:id="@+id/nav_pantryList"
+        android:name="allam9072.mealplanner.ui.list_pantry.PantryListFragment"
+        android:label="@string/menu_pantry_list"
+        tools:layout="@layout/fragment_pantry_list" />
+
+    <fragment
+        android:id="@+id/nav_groceryList"
+        android:name="allam9072.mealplanner.ui.list_grocery.GroceryListFragment"
+        android:label="@string/menu_grocery_list"
+        tools:layout="@layout/fragment_grocery_list" />
+
+    <fragment
+        android:id="@+id/nav_MyShoppingBasket"
+        android:name="allam9072.mealplanner.ui.list_MyShoppingBasket.MyShoppingBasketFragment"
+        android:label="@string/menu_my_shopping_basket"
+        tools:layout="@layout/fragment_my_shopping_basket" />
+</navigation>
