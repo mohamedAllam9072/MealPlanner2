@@ -86,6 +86,7 @@ public class MealPlanActivity extends AppCompatActivity implements MealPlanAdapt
         MealId = intent.getIntExtra("mealId", 0);
         String day_name = intent.getStringExtra("mealName");
         SelectedProductsList = intent.getParcelableArrayListExtra("arrayList");
+        setTitle(day_name);
         Toast.makeText(this, MealId + " " + day_name + " " + "\n", Toast.LENGTH_SHORT).show();
     }
 
