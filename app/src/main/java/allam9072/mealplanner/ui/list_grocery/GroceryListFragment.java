@@ -21,6 +21,7 @@ public class GroceryListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         //using data binding
+        //new comment
         groceryListViewModel =
                 ViewModelProviders.of(this).get(GroceryListViewModel.class);
         View root = inflater.inflate(R.layout.fragment_grocery_list, container, false);
