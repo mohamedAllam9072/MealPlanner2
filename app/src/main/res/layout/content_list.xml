@@ -35,10 +35,11 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_2"
-            android:padding="4dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/tabLayout" />
+            android:layout_below="@id/tabLayout"
+            android:layout_marginTop="2dp"
+            tools:listitem="@layout/item_rv_product_2" />
 
 
     </RelativeLayout>
