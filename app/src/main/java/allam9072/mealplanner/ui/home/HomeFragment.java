@@ -35,8 +35,7 @@ public class HomeFragment extends Fragment {
     adapter adapter;
     List<Category> categoryList;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         sliderView = root.findViewById(R.id.imageSlider);

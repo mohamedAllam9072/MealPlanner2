@@ -11,12 +11,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import allam9072.mealplanner.DB.Product;
 import allam9072.mealplanner.DB.m_Tables.ProductEntity;
 import allam9072.mealplanner.R;
-import allam9072.mealplanner.ui.view_product_profile.ProductProfileActivity;
+import allam9072.mealplanner.ui.product_profile.ProductProfileActivity;
 
 public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.mVH> {
     private List<ProductEntity> productList = new ArrayList<>();
@@ -36,9 +39,18 @@ public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.mVH> {
     @Override
     public void onBindViewHolder(@NonNull GroceryAdapter.mVH holder, int position) {
         holder.textView1.setText(productList.get(position).getProduct_name());
-        holder.textView2.setText(productList.get(position).getProduct_name());
-        holder.textView3.setText(productList.get(position).getProduct_name());
-        //TODO image view with picasso
+        holder.textView2.setText("" + productList.get(position).getProduct_price());
+        holder.textView3.setText("" + productList.get(position).getProduct_weight());
+//        try {
+//            String imageUrl = productList.get(position).getProd_image();
+//            Picasso.with(context)
+//                    .load(imageUrl)
+//                    .error(R.drawable.food1)
+//                    .fit()
+//                    .centerCrop()
+//                    .into(holder.imageView);
+//        } catch (Exception ignored) {
+//        }
     }
 
     @Override

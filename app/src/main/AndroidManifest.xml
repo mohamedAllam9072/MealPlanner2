@@ -17,7 +17,7 @@
             android:label="@string/title_activity_list"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.view_product_profile.ProductProfileActivity"
+            android:name=".ui.product_profile.ProductProfileActivity"
             android:label="@string/title_activity_list"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

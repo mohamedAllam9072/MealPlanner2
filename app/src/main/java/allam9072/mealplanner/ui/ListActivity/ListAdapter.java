@@ -18,7 +18,7 @@ import java.util.List;
 
 import allam9072.mealplanner.DB.Product;
 import allam9072.mealplanner.R;
-import allam9072.mealplanner.ui.view_product_profile.ProductProfileActivity;
+import allam9072.mealplanner.ui.product_profile.ProductProfileActivity;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.mVH> {
     private Context context;

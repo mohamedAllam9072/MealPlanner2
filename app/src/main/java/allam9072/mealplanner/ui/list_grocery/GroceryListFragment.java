@@ -19,7 +19,7 @@ import java.util.List;
 
 import allam9072.mealplanner.DB.m_Tables.ProductEntity;
 import allam9072.mealplanner.R;
-import allam9072.mealplanner.ui.view_product_profile.ProductProfileActivity;
+import allam9072.mealplanner.ui.product_profile.ProductProfileActivity;
 
 public class GroceryListFragment extends Fragment {
 
