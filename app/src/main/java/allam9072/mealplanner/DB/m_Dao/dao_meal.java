@@ -18,7 +18,7 @@ import allam9072.mealplanner.DB.m_Tables.MealProductsRelation;
 
 @Dao
 public interface dao_meal {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(MealEntity mealEntity);
 
     @Update
@@ -40,5 +40,8 @@ public interface dao_meal {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertMealProducts(MealProductXRefEntity mealProductXRefEntity);
+
+    @Delete
+    void deleteMealProduct(MealProductXRefEntity mealProductXRefEntity);
 
 }

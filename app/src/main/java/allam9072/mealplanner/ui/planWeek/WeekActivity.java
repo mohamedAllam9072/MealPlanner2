@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,22 +69,7 @@ public class WeekActivity extends AppCompatActivity implements DatePickerDialog.
         });
     }
 
-    private void SaveWeekPlan() {
-        /**
-         * OUTPUT : save week plan
-         * INPUT : get All week data {id ,name, start date,days[]}
-         *
-         * */
-        Button btn_save = findViewById(R.id.btn_save_week_plan);
-        btn_save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-
-            }
-        });
-
-    }
 
     private void getWeekId() {
         Intent intent = getIntent();

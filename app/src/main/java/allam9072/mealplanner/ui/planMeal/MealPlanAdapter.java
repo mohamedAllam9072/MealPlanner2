@@ -26,7 +26,7 @@ public class MealPlanAdapter extends RecyclerView.Adapter<MealPlanAdapter.mVH> {
     @Override
     public mVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_rv_product_name, parent, false);
+                .inflate(R.layout.item_rv_product_x, parent, false);
         return new mVH(view, mOnClickListener);
     }
 
@@ -60,7 +60,7 @@ public class MealPlanAdapter extends RecyclerView.Adapter<MealPlanAdapter.mVH> {
 
         public mVH(@NonNull View itemView, mOnClickListener mOnClickListener) {
             super(itemView);
-            textView = itemView.findViewById(R.id.tv_product_title);
+            textView = itemView.findViewById(R.id.product_name);
             this.mOnClickListener = mOnClickListener;
             itemView.setOnClickListener(this);
 
@@ -69,8 +69,7 @@ public class MealPlanAdapter extends RecyclerView.Adapter<MealPlanAdapter.mVH> {
 
         @Override
         public void onClick(View v) {
-            int position = getAdapterPosition();
-            mOnClickListener.click(position);
+            mOnClickListener.click(getAdapterPosition());
             v.setVisibility(View.GONE);
         }
     }

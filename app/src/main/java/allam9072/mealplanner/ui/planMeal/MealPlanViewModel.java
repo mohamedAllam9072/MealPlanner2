@@ -4,7 +4,6 @@ import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
@@ -17,7 +16,6 @@ import allam9072.mealplanner.DB.m_Tables.ProductEntity;
 public class MealPlanViewModel extends AndroidViewModel {
     private Repo repo;
     private LiveData<List<ProductEntity>> AllProducts;
-    private LiveData<List<MealProductsRelation>> mealProducts;
     private LiveData<List<MealProductsRelation>> new_mealProducts;
 
 
@@ -37,10 +35,6 @@ public class MealPlanViewModel extends AndroidViewModel {
         return AllProducts;
     }
 
-    public LiveData<List<MealProductsRelation>> getMealProducts() {
-        return mealProducts;
-    }
-
 
     public void InsertMeal(MealEntity meal) {
         repo.insert_meal(meal);
@@ -52,6 +46,10 @@ public class MealPlanViewModel extends AndroidViewModel {
 
     public void InsertMealProduct(MealProductXRefEntity mealProductXRef) {
         repo.insert_meal_product(mealProductXRef);
+    }
+
+    void deleteMealProduct(MealProductXRefEntity mealProduct) {
+        repo.delete_meal_product(mealProduct);
     }
 
     void DeleteMeal(MealEntity meal) {

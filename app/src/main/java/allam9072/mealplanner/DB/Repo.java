@@ -30,7 +30,6 @@ public class Repo {
     private LiveData<List<DayEntity>> allDays;
     private LiveData<List<MealEntity>> allMeals;
     private LiveData<List<ProductEntity>> allProducts;
-    private LiveData<List<MealProductsRelation>> mealProducts;
     private LiveData<List<MealProductsRelation>> new_mealProducts;
 
     private LiveData<List<DayMealsRelation>> DayMeals;
@@ -48,25 +47,8 @@ public class Repo {
         allProducts = dao_product.getAllProducts();
         DayMeals = dao_day.getDayMeals();
 
-        mealProducts = dao_meal.getMealProducts();
-
     }
 
-    public allam9072.mealplanner.DB.m_Dao.dao_week getDao_week() {
-        return dao_week;
-    }
-
-    public allam9072.mealplanner.DB.m_Dao.dao_day getDao_day() {
-        return dao_day;
-    }
-
-    public allam9072.mealplanner.DB.m_Dao.dao_meal getDao_meal() {
-        return dao_meal;
-    }
-
-    public allam9072.mealplanner.DB.m_Dao.dao_product getDao_product() {
-        return dao_product;
-    }
 
     /*** insert methods****************************************************************************************************/
     public void insert_week(WeekEntity weekEntity) {
@@ -94,6 +76,10 @@ public class Repo {
         new DeleteMealAsyncTask(dao_meal).execute(mealEntity);
     }
 
+    public void delete_meal_product(MealProductXRefEntity mealProductXRefEntity) {
+        new DeleteMealProductsXRefAsyncTask(dao_meal).execute(mealProductXRefEntity);
+    }
+
     /*** update methods****************************************************************************************************/
     public void update_meal(MealEntity mealEntity) {
         new UpdateMealAsyncTask(dao_meal).execute(mealEntity);
@@ -118,10 +104,6 @@ public class Repo {
 
     public LiveData<List<DayMealsRelation>> getDayMeals() {
         return DayMeals;
-    }
-
-    public LiveData<List<MealProductsRelation>> getMealProducts() {
-        return mealProducts;
     }
 
     public LiveData<List<MealProductsRelation>> getNewMealProducts(int mealId) {
@@ -215,6 +197,21 @@ public class Repo {
             return null;
         }
     }
+
+    private static class DeleteMealProductsXRefAsyncTask extends AsyncTask<MealProductXRefEntity, Void, Void> {
+        private dao_meal dao_meal;
+
+        public DeleteMealProductsXRefAsyncTask(dao_meal dao_meal) {
+            this.dao_meal = dao_meal;
+        }
+
+        @Override
+        protected Void doInBackground(MealProductXRefEntity... mealProducts) {
+            this.dao_meal.deleteMealProduct(mealProducts[0]);
+            return null;
+        }
+    }
+
 
     /****  UPDATE*/
     private static class UpdateMealAsyncTask extends AsyncTask<MealEntity, Void, Void> {

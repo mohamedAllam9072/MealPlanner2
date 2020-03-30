@@ -25,6 +25,13 @@
     <color name="GRAY">#AAAAAA</color>
     <color name="SILVER">#DDDDDD</color>
     <color name="WHITE">#FFFFFF</color>
+    <color name="MINT">#90FB98</color>
+    <color name="Emerald_green">#50C878</color>
+
+    <color name="set1_1">#1B262C</color>
+    <color name="set1_2">#0F4C75</color>
+    <color name="set1_3">#3282b8</color>
+    <color name="set1_4">#bbe1fa</color>
 
 
 </resources>
