@@ -2,7 +2,6 @@ package allam9072.mealplanner.ui.planWeek;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +11,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import allam9072.mealplanner.DB.m_Tables.MealProductsRelation;
 import allam9072.mealplanner.R;
-
 import allam9072.mealplanner.ui.planMeal.MealPlanActivity;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
@@ -66,12 +63,9 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.mVH> {
                 public void onClick(View v) {
                     Intent intent = new Intent(context, MealPlanActivity.class);
                     intent.putExtra("mealId", meal_products.get(getAdapterPosition()).meal.getMealId());
-                    intent.putExtra("mealName", meal_products.get(getAdapterPosition()).meal.getMeal_name());
-                    intent.putParcelableArrayListExtra(
-                            "arrayList", (ArrayList<? extends Parcelable>) meal_products.get(getAdapterPosition()).products);
                     intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
-                    Toast.makeText(context, " Meal", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, " NestedAdapter", Toast.LENGTH_SHORT).show();
                 }
             });
 

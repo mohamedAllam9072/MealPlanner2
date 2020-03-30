@@ -17,12 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import allam9072.mealplanner.DB.Product;
+import allam9072.mealplanner.DB.m_Tables.MealProductsRelation;
 import allam9072.mealplanner.DB.m_Tables.ProductEntity;
 import allam9072.mealplanner.R;
 import allam9072.mealplanner.ui.product_profile.ProductProfileActivity;
 
 public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.mVH> {
-    private List<ProductEntity> productList = new ArrayList<>();
+    private List<MealProductsRelation> productList = new ArrayList<>();
     private Context context;
 
     public GroceryAdapter(Context context) {
@@ -38,9 +39,9 @@ public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.mVH> {
 
     @Override
     public void onBindViewHolder(@NonNull GroceryAdapter.mVH holder, int position) {
-        holder.textView1.setText(productList.get(position).getProduct_name());
-        holder.textView2.setText("" + productList.get(position).getProduct_price());
-        holder.textView3.setText("" + productList.get(position).getProduct_weight());
+        holder.textView1.setText(productList.get(position).products.get(position).getProduct_name());
+        holder.textView2.setText("" + productList.get(position).products.get(position).getProduct_price());
+        holder.textView3.setText("" + productList.get(position).products.get(position).getProduct_weight());
 //        try {
 //            String imageUrl = productList.get(position).getProd_image();
 //            Picasso.with(context)
@@ -58,7 +59,7 @@ public class GroceryAdapter extends RecyclerView.Adapter<GroceryAdapter.mVH> {
         return productList.size();
     }
 
-    public void setProducts(List<ProductEntity> products) {
+    public void setProducts(List<MealProductsRelation> products) {
         this.productList = products;
         notifyDataSetChanged();
     }

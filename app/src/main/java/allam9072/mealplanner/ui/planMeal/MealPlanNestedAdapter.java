@@ -12,18 +12,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.card.MaterialCardView;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import allam9072.mealplanner.DB.m_Tables.MealProductsRelation;
 import allam9072.mealplanner.DB.m_Tables.ProductEntity;
 import allam9072.mealplanner.R;
 import allam9072.mealplanner.ui.product_profile.ProductProfileActivity;
 
 public class MealPlanNestedAdapter extends RecyclerView.Adapter<MealPlanNestedAdapter.mVH> {
-    private List<ProductEntity> selectedProductsList;
     private Context context;
+    private List<ProductEntity> mealProductsList = new ArrayList<>();
 
-    public MealPlanNestedAdapter(Context context, List<ProductEntity> selectedProductsList) {
-        this.selectedProductsList = selectedProductsList;
+
+    public MealPlanNestedAdapter(Context context) {
         this.context = context;
     }
 
@@ -36,13 +38,18 @@ public class MealPlanNestedAdapter extends RecyclerView.Adapter<MealPlanNestedAd
 
     @Override
     public void onBindViewHolder(@NonNull mVH holder, int position) {
-        holder.textView.setText(selectedProductsList.get(position).getProduct_name());
+        holder.textView.setText(mealProductsList.get(position).getProduct_name());
 
+    }
+
+    public void setMealProductsList(List<ProductEntity> mealProductsList) {
+        this.mealProductsList = mealProductsList;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return selectedProductsList.size();
+        return mealProductsList.size();
     }
 
     public class mVH extends RecyclerView.ViewHolder {

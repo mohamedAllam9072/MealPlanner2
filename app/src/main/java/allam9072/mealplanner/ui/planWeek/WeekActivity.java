@@ -30,30 +30,6 @@ import allam9072.mealplanner.DB.m_Tables.DayEntity;
 import allam9072.mealplanner.DB.m_Tables.MealProductsRelation;
 import allam9072.mealplanner.R;
 import allam9072.mealplanner.ui.planDay.DayPlanActivity;
-
-/**
- * Activity Goal
- * <p>
- * OPENED FROM :   BOTTOM add_new_week in weeksFragment
- * ENDED TO: MealPlan Activity
- * INPUT : weekItem --> week id
- * OUTPUT : create New Week with all features
- * Features :  week name
- * week start date
- * week days data
- * <p>
- * SUB_PROCESSES :
- * 1 - get Week name
- * 2 - get Week start date
- * 3 - from Recycler_view item go to DayPlan Activity
- * input :  String[] days
- * week id
- * output :  goto DayPlanActivity with dayName and DayId
- * process : RecyclerViewAdapter  input --> list of days
- * output--> go to DayPlanActivity with dayID and DayName
- * <p>
- * 4-  Button DONE to save week plan finally
- */
 public class WeekActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private int receivedWeekId;
     private RecyclerView recyclerView;
@@ -73,18 +49,6 @@ public class WeekActivity extends AppCompatActivity implements DatePickerDialog.
                 adapter.setDays(days);
             }
         });
-//        viewModel.getMeals().observe(this, new Observer<List<e_meal>>() {
-//            @Override
-//            public void onChanged(List<e_meal> e_meals) {
-//                adapter.setMeals(e_meals);
-//            }
-//        });
-//        viewModel.getDay_meals().observe(this, new Observer<List<r_day_meals>>() {
-//            @Override
-//            public void onChanged(List<r_day_meals> r_day_meals) {
-//                adapter.setDay_meals(r_day_meals);
-//            }
-//        });
         viewModel.getMeal_products().observe(this, new Observer<List<MealProductsRelation>>() {
             @Override
             public void onChanged(List<MealProductsRelation> mealProducts) {

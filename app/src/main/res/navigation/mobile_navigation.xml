@@ -40,4 +40,9 @@
         android:name="allam9072.mealplanner.ui.list_MyShoppingBasket.MyShoppingBasketFragment"
         android:label="@string/menu_my_shopping_basket"
         tools:layout="@layout/fragment_my_shopping_basket" />
+    <fragment
+        android:id="@+id/nav_meal"
+        android:name="allam9072.mealplanner.ui.meals.MealsFragment"
+        android:label="@string/menu_meal"
+        tools:layout="@layout/meals_fragment" />
 </navigation>

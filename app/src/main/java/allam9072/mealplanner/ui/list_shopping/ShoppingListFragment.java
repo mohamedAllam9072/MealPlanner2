@@ -4,32 +4,47 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
+import allam9072.mealplanner.DB.m_Tables.ProductEntity;
 import allam9072.mealplanner.R;
 
-public class ShoppingListFragment extends Fragment {
+public class ShoppingListFragment extends Fragment implements ShoppingAdapter.ProductCLickListener {
 
-    private ShoppingListViewModel shoppingListViewModel;
+    private ShoppingViewModel viewModel;
+    private ShoppingAdapter adapter = new ShoppingAdapter(this);
+    private int ShoppingTotalCash = 0;
+    private RecyclerView recyclerView;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        shoppingListViewModel =
-                ViewModelProviders.of(this).get(ShoppingListViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        viewModel = ViewModelProviders.of(this).get(ShoppingViewModel.class);
         View root = inflater.inflate(R.layout.fragment_shopping_list, container, false);
-        final TextView textView = root.findViewById(R.id.text_slideshow);
-        shoppingListViewModel.getText().observe(this, new Observer<String>() {
+        viewModel.getProducts().observe(getViewLifecycleOwner(), new Observer<List<ProductEntity>>() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onChanged(List<ProductEntity> products) {
+                adapter.setProducts(products);
             }
         });
+        recyclerView = root.findViewById(R.id.rv_shopping);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
+
         return root;
+    }
+
+    @Override
+    public void click(int position) {
+        ShoppingTotalCash += viewModel.getProducts().getValue().get(position).getProduct_price();
+        Toast.makeText(getContext(), String.valueOf(ShoppingTotalCash), Toast.LENGTH_SHORT).show();
+
     }
 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Transaction;
 import androidx.room.Update;
@@ -29,14 +30,15 @@ public interface dao_meal {
     @Query("Select * from MealEntity")
     LiveData<List<MealEntity>> getAllMeals();
 
+    @Transaction
     @Query("Select * from MealEntity where mealId =:mId")
-    LiveData<List<MealEntity>> getMealByID(int mId);
+    LiveData<List<MealProductsRelation>> getMealByID(int mId);
 
     @Transaction
     @Query("SELECT * FROM MealEntity")
-    LiveData<List<MealProductsRelation>> getNewMealProducts();
+    LiveData<List<MealProductsRelation>> getMealProducts();
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertMealProducts(MealProductXRefEntity mealProductXRefEntity);
 
 }

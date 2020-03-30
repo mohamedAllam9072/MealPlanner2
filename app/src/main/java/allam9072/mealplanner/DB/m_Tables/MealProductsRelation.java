@@ -18,4 +18,5 @@ public class MealProductsRelation {
                     parentColumn = "mId",
                     entityColumn = "pId"))
     public List<ProductEntity> products;
+
 }

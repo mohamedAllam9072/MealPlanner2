@@ -1,5 +1,12 @@
 package allam9072.mealplanner.DB;
 
+import android.app.Application;
+import android.os.AsyncTask;
+
+import androidx.lifecycle.LiveData;
+
+import java.util.List;
+
 import allam9072.mealplanner.DB.m_Dao.dao_day;
 import allam9072.mealplanner.DB.m_Dao.dao_meal;
 import allam9072.mealplanner.DB.m_Dao.dao_product;
@@ -13,13 +20,6 @@ import allam9072.mealplanner.DB.m_Tables.MealProductsRelation;
 import allam9072.mealplanner.DB.m_Tables.ProductEntity;
 import allam9072.mealplanner.DB.m_Tables.WeekEntity;
 
-import android.app.Application;
-import android.os.AsyncTask;
-
-import androidx.lifecycle.LiveData;
-
-import java.util.List;
-
 public class Repo {
     private dao_week dao_week;
     private dao_day dao_day;
@@ -30,22 +30,42 @@ public class Repo {
     private LiveData<List<DayEntity>> allDays;
     private LiveData<List<MealEntity>> allMeals;
     private LiveData<List<ProductEntity>> allProducts;
-    private LiveData<List<MealProductsRelation>> MealProducts;
+    private LiveData<List<MealProductsRelation>> mealProducts;
+    private LiveData<List<MealProductsRelation>> new_mealProducts;
+
     private LiveData<List<DayMealsRelation>> DayMeals;
 
     public Repo(Application application) {
         m_DataBase m_dataBase = m_DataBase.getInstance(application);
         dao_week = m_dataBase.dao_week();
-        allWeeks = dao_week.getAllWeeks();
         dao_day = m_dataBase.dao_day();
         dao_meal = m_dataBase.dao_meal();
         dao_product = m_dataBase.dao_product();
+
+        allWeeks = dao_week.getAllWeeks();
         allDays = dao_day.getAllDays();
         allMeals = dao_meal.getAllMeals();
         allProducts = dao_product.getAllProducts();
-        MealProducts = dao_meal.getNewMealProducts();
         DayMeals = dao_day.getDayMeals();
 
+        mealProducts = dao_meal.getMealProducts();
+
+    }
+
+    public allam9072.mealplanner.DB.m_Dao.dao_week getDao_week() {
+        return dao_week;
+    }
+
+    public allam9072.mealplanner.DB.m_Dao.dao_day getDao_day() {
+        return dao_day;
+    }
+
+    public allam9072.mealplanner.DB.m_Dao.dao_meal getDao_meal() {
+        return dao_meal;
+    }
+
+    public allam9072.mealplanner.DB.m_Dao.dao_product getDao_product() {
+        return dao_product;
     }
 
     /*** insert methods****************************************************************************************************/
@@ -96,12 +116,17 @@ public class Repo {
         return allProducts;
     }
 
-    public LiveData<List<MealProductsRelation>> getMealProducts() {
-        return MealProducts;
-    }
-
     public LiveData<List<DayMealsRelation>> getDayMeals() {
         return DayMeals;
+    }
+
+    public LiveData<List<MealProductsRelation>> getMealProducts() {
+        return mealProducts;
+    }
+
+    public LiveData<List<MealProductsRelation>> getNewMealProducts(int mealId) {
+        new_mealProducts = dao_meal.getMealByID(mealId);
+        return new_mealProducts;
     }
 
     /*** ASYNC TASK methods****************************************************************************************************/
