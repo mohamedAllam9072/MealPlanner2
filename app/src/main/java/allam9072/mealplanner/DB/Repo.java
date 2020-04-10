@@ -18,6 +18,7 @@ import allam9072.mealplanner.DB.m_Tables.MealEntity;
 import allam9072.mealplanner.DB.m_Tables.MealProductXRefEntity;
 import allam9072.mealplanner.DB.m_Tables.MealProductsRelation;
 import allam9072.mealplanner.DB.m_Tables.ProductEntity;
+import allam9072.mealplanner.DB.m_Tables.WeekDaysRelation;
 import allam9072.mealplanner.DB.m_Tables.WeekEntity;
 
 public class Repo {
@@ -30,9 +31,12 @@ public class Repo {
     private LiveData<List<DayEntity>> allDays;
     private LiveData<List<MealEntity>> allMeals;
     private LiveData<List<ProductEntity>> allProducts;
+    private LiveData<List<MealProductsRelation>> mealProducts;
+
+    private LiveData<List<WeekDaysRelation>> weekDays;
+    private LiveData<List<DayMealsRelation>> dayMeals;
     private LiveData<List<MealProductsRelation>> new_mealProducts;
 
-    private LiveData<List<DayMealsRelation>> DayMeals;
 
     public Repo(Application application) {
         m_DataBase m_dataBase = m_DataBase.getInstance(application);
@@ -45,7 +49,8 @@ public class Repo {
         allDays = dao_day.getAllDays();
         allMeals = dao_meal.getAllMeals();
         allProducts = dao_product.getAllProducts();
-        DayMeals = dao_day.getDayMeals();
+        mealProducts = dao_meal.getMealProducts();
+
 
     }
 
@@ -103,14 +108,27 @@ public class Repo {
     }
 
     public LiveData<List<DayMealsRelation>> getDayMeals() {
-        return DayMeals;
+        return dayMeals;
+    }
+
+    public LiveData<List<MealProductsRelation>> getMealProducts() {
+        return mealProducts;
+    }
+
+    public LiveData<List<WeekDaysRelation>> getWeekDays(int weekID) {
+        weekDays = dao_week.getWeekDays(weekID);
+        return weekDays;
+    }
+
+    public LiveData<List<DayMealsRelation>> getDayMeals(int dayID) {
+        dayMeals = dao_day.getDayMeals(dayID);
+        return dayMeals;
     }
 
     public LiveData<List<MealProductsRelation>> getNewMealProducts(int mealId) {
         new_mealProducts = dao_meal.getMealByID(mealId);
         return new_mealProducts;
     }
-
     /*** ASYNC TASK methods****************************************************************************************************/
     /***** INSERT*/
     private static class InsertWeekAsyncTask extends AsyncTask<WeekEntity, Void, Void> {

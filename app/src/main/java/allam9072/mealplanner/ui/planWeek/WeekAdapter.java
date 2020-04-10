@@ -9,6 +9,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,11 +26,14 @@ import allam9072.mealplanner.ui.planMeal.MealPlanActivity;
 
 public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.mVH> {
     private Context context;
-    private List<DayEntity> days = new ArrayList<>();
-    private List<MealEntity> meals = new ArrayList<>();
-    private List<MealProductsRelation> meal_products = new ArrayList<>();
-    private List<DayMealsRelation> day_meals = new ArrayList<>();
+    private WeekViewModel viewModel;
+    private LifecycleOwner lifecycleOwner;
+    private String[] days_title = {"Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+    private List<DayEntity> weekDays = new ArrayList<>();
+    private List<MealEntity> dayMeals = new ArrayList<>();
+    private List<MealProductsRelation> mealProducts = new ArrayList<>();
     private listener listener;
+    private NestedAdapter nestedAdapter;
 
     public WeekAdapter(Context context) {
         this.context = context;
@@ -43,18 +48,53 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.mVH> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull mVH holder, int position) {
-        holder.tv_DayTitle.setText(days.get(position).getDay_name());
-        holder.tv_DayDate.setText(days.get(position).getDay_name());
+    public void onBindViewHolder(@NonNull mVH holder, final int position) {
+        holder.tv_DayTitle.setText(weekDays.get(position).getDay_name());
+        holder.tv_DayDate.setText("" + weekDays.get(position).getDayId());
         holder.nested_rv.setLayoutManager(new LinearLayoutManager(context));
-        holder.nested_rv.setAdapter(
-                new NestedAdapter(context, meal_products));
+        viewModel.getDayMeals(weekDays.get(position).getDayId())
+                .observe(lifecycleOwner, new Observer<List<DayMealsRelation>>() {
+                    @Override
+                    public void onChanged(List<DayMealsRelation> dayMeals) {
+                        setDayMeals(dayMeals.get(0).meals);
+                    }
+                });
+        holder.nested_rv.setAdapter(nestedAdapter);
 
     }
 
     @Override
     public int getItemCount() {
-        return days.size();
+        return weekDays.size();
+    }
+
+    public void setWeekDays(List<DayEntity> weekDays) {
+        this.weekDays = weekDays;
+        notifyDataSetChanged();
+    }
+
+    public interface listener {
+        void click(DayEntity day);
+    }
+
+    public void setListener(WeekAdapter.listener listener) {
+        this.listener = listener;
+    }
+
+    public void setDayMeals(List<MealEntity> dayMeals) {
+        this.dayMeals = dayMeals;
+    }
+
+    public void setMealProducts(List<MealProductsRelation> mealProducts) {
+        this.mealProducts = mealProducts;
+    }
+
+    public void setViewModel(WeekViewModel viewModel) {
+        this.viewModel = viewModel;
+    }
+
+    public void setLifecycleOwner(LifecycleOwner lifecycleOwner) {
+        this.lifecycleOwner = lifecycleOwner;
     }
 
     public class mVH extends RecyclerView.ViewHolder {
@@ -64,8 +104,8 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.mVH> {
 
         public mVH(@NonNull final View itemView) {
             super(itemView);
-            tv_DayDate = itemView.findViewById(R.id.tv_dayTitle_f);
-            tv_DayTitle = itemView.findViewById(R.id.tv_dayDate_f);
+            tv_DayDate = itemView.findViewById(R.id.tv_dayDate_f);
+            tv_DayTitle = itemView.findViewById(R.id.tv_dayTitle_f);
             btn_add_new_meal = itemView.findViewById(R.id.btn_add_new_meal_f);
             btn_add_new_meal.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -79,34 +119,5 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.mVH> {
 
 
         }
-    }
-
-    public interface listener {
-        void click(DayEntity day);
-    }
-
-    public void setListener(WeekAdapter.listener listener) {
-        this.listener = listener;
-    }
-
-    /**
-     * this method refer to observes in Main_activity view_model calling
-     */
-    public void setDays(List<DayEntity> days) {
-        this.days = days;
-        notifyDataSetChanged();
-    }
-
-    public void setMeals(List<MealEntity> meals) {
-        this.meals = meals;
-        notifyDataSetChanged();
-    }
-
-    public void setMeal_products(List<MealProductsRelation> meal_products) {
-        this.meal_products = meal_products;
-    }
-
-    public void setDay_meals(List<DayMealsRelation> day_meals) {
-        this.day_meals = day_meals;
     }
 }

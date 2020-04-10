@@ -11,8 +11,8 @@ import androidx.room.Update;
 import java.util.List;
 
 import allam9072.mealplanner.DB.m_Tables.DayEntity;
-import allam9072.mealplanner.DB.m_Tables.DayMealsXRefEntity;
 import allam9072.mealplanner.DB.m_Tables.DayMealsRelation;
+import allam9072.mealplanner.DB.m_Tables.DayMealsXRefEntity;
 
 @Dao
 public interface dao_day {
@@ -28,9 +28,11 @@ public interface dao_day {
     @Query("Select * From DayEntity")
     LiveData<List<DayEntity>> getAllDays();
 
+
     @Transaction
-    @Query("select * From DayEntity")
-    LiveData<List<DayMealsRelation>> getDayMeals();
+    @Query("select * From DayEntity where dayId =:dayID ")
+    LiveData<List<DayMealsRelation>> getDayMeals(int dayID);
+
     @Insert
     void insertDayMeals(DayMealsXRefEntity dayMealsXRefEntity);
 

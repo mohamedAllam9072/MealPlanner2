@@ -69,9 +69,9 @@ public abstract class m_DataBase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            dao_week.insert(new WeekEntity("week 1"));
-            dao_week.insert(new WeekEntity("week 2"));
-            dao_week.insert(new WeekEntity("week 3"));
+            dao_week.insert(new WeekEntity("week 1", "22 apr 2020"));
+            dao_week.insert(new WeekEntity("week 2", "11 may 2020"));
+            dao_week.insert(new WeekEntity("week 3", "17 july 1997"));
 
 
             dao_day.insert(new DayEntity("Saturday"));
@@ -132,6 +132,31 @@ public abstract class m_DataBase extends RoomDatabase {
             dao_day.insertDayMeals(new DayMealsXRefEntity(7, 1));
             dao_day.insertDayMeals(new DayMealsXRefEntity(7, 2));
             dao_day.insertDayMeals(new DayMealsXRefEntity(7, 3));
+
+            dao_week.insertWeekDays(new WeekDaysXRefEntity(1, 1));
+            dao_week.insertWeekDays(new WeekDaysXRefEntity(1, 2));
+            dao_week.insertWeekDays(new WeekDaysXRefEntity(1, 3));
+            dao_week.insertWeekDays(new WeekDaysXRefEntity(1, 4));
+            dao_week.insertWeekDays(new WeekDaysXRefEntity(1, 5));
+            dao_week.insertWeekDays(new WeekDaysXRefEntity(1, 6));
+            dao_week.insertWeekDays(new WeekDaysXRefEntity(1, 7));
+
+            dao_week.insertWeekDays(new WeekDaysXRefEntity(2, 1));
+            dao_week.insertWeekDays(new WeekDaysXRefEntity(2, 2));
+            dao_week.insertWeekDays(new WeekDaysXRefEntity(2, 3));
+            dao_week.insertWeekDays(new WeekDaysXRefEntity(2, 4));
+            dao_week.insertWeekDays(new WeekDaysXRefEntity(2, 5));
+            dao_week.insertWeekDays(new WeekDaysXRefEntity(2, 6));
+            dao_week.insertWeekDays(new WeekDaysXRefEntity(2, 7));
+
+            dao_week.insertWeekDays(new WeekDaysXRefEntity(3, 1));
+            dao_week.insertWeekDays(new WeekDaysXRefEntity(3, 2));
+            dao_week.insertWeekDays(new WeekDaysXRefEntity(3, 3));
+            dao_week.insertWeekDays(new WeekDaysXRefEntity(3, 4));
+            dao_week.insertWeekDays(new WeekDaysXRefEntity(3, 5));
+            dao_week.insertWeekDays(new WeekDaysXRefEntity(3, 6));
+            dao_week.insertWeekDays(new WeekDaysXRefEntity(3, 7));
+
 
 
             return null;

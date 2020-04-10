@@ -19,7 +19,7 @@ public class GroceryViewModel extends AndroidViewModel {
     public GroceryViewModel(Application application) {
         super(application);
         repo = new Repo(application);
-        Mealproducts = repo.getMealProducts();
+        //Mealproducts = repo.getMealProducts();
 
     }
 

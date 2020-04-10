@@ -25,13 +25,13 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.List;
 
-import allam9072.mealplanner.DB.m_Tables.DayEntity;
-import allam9072.mealplanner.DB.m_Tables.MealProductsRelation;
+import allam9072.mealplanner.DB.m_Tables.WeekDaysRelation;
 import allam9072.mealplanner.R;
-import allam9072.mealplanner.ui.planDay.DayPlanActivity;
+
 public class WeekActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
-    private int receivedWeekId;
+    private int weekId;
     private RecyclerView recyclerView;
+    private TextView tv_Date;
     private WeekAdapter adapter;
     private WeekViewModel viewModel;
 
@@ -40,42 +40,34 @@ public class WeekActivity extends AppCompatActivity implements DatePickerDialog.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_week_plan);
-        adapter = new WeekAdapter(getApplicationContext());
-        viewModel = new ViewModelProvider(this).get(WeekViewModel.class);
-        viewModel.getDays().observe(this, new Observer<List<DayEntity>>() {
-            @Override
-            public void onChanged(List<DayEntity> days) {
-                adapter.setDays(days);
-            }
-        });
-        viewModel.getMeal_products().observe(this, new Observer<List<MealProductsRelation>>() {
-            @Override
-            public void onChanged(List<MealProductsRelation> mealProducts) {
-                adapter.setMeal_products(mealProducts);
-            }
-        });
 
+        init();
+
+        viewModel.getWeekDays(weekId).observe(this, new Observer<List<WeekDaysRelation>>() {
+            @Override
+            public void onChanged(List<WeekDaysRelation> weekDays) {
+                adapter.setWeekDays(weekDays.get(0).days);
+                tv_Date.setText(weekDays.get(0).week.getWeek_date());
+            }
+        });
+        adapter.setViewModel(viewModel);
+        adapter.setLifecycleOwner(this);
+    }
+
+    private void init() {
+        //views
+        tv_Date = findViewById(R.id.tv_date);
         recyclerView = findViewById(R.id.rv_week_plan);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new WeekAdapter(getApplicationContext());
         recyclerView.setAdapter(adapter);
-        adapter.setListener(new WeekAdapter.listener() {
-            @Override
-            public void click(DayEntity day) {
-                Intent intent = new Intent(getApplicationContext(), DayPlanActivity.class);
-                intent.putExtra("dayTitle", day.getDay_name());
-                intent.putExtra("day_id", day.getDayId());
-                startActivity(intent);
-            }
-        });
-    }
-
-
-
-    private void getWeekId() {
+        //data
+        viewModel = new ViewModelProvider(this).get(WeekViewModel.class);
         Intent intent = getIntent();
-        receivedWeekId = intent.getIntExtra("week_id", 0);
+        weekId = intent.getIntExtra("week_id", 1);
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -123,7 +115,7 @@ public class WeekActivity extends AppCompatActivity implements DatePickerDialog.
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         String dateString = DateFormat.getDateInstance().format(calendar.getTime());
-        TextView tv_Date = findViewById(R.id.tv_date);
+
         tv_Date.setText(dateString);
 
     }

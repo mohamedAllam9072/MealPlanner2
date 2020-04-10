@@ -9,7 +9,6 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import allam9072.mealplanner.DB.Repo;
-import allam9072.mealplanner.DB.m_Dao.dao_product;
 import allam9072.mealplanner.DB.m_Tables.MealProductsRelation;
 
 public class MealsViewModel extends AndroidViewModel {
@@ -19,7 +18,7 @@ public class MealsViewModel extends AndroidViewModel {
     public MealsViewModel(@NonNull Application application) {
         super(application);
         repo = new Repo(application);
-        mealProducts = repo.getMealProducts();
+        //  mealProducts = repo.getMealProducts();
     }
 
     public LiveData<List<MealProductsRelation>> getMealProducts() {

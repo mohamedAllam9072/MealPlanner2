@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -18,7 +19,6 @@ import java.util.List;
 
 import allam9072.mealplanner.DB.m_Tables.WeekEntity;
 import allam9072.mealplanner.R;
-import allam9072.mealplanner.TempActivity;
 import allam9072.mealplanner.ui.planWeek.WeekActivity;
 
 public class WeeksFragment extends Fragment {
@@ -53,8 +53,9 @@ public class WeeksFragment extends Fragment {
         adapter.setListener(new WeeksAdapter.listener() {
             @Override
             public void click(WeekEntity week) {
-                Intent intent = new Intent(getContext(), TempActivity.class);
+                Intent intent = new Intent(getContext(), WeekActivity.class);
                 intent.putExtra("week_id", week.getWeekId());
+                Toast.makeText(getContext(), String.valueOf(week.getWeekId()), Toast.LENGTH_SHORT).show();
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getActivity().startActivity(intent);
             }
