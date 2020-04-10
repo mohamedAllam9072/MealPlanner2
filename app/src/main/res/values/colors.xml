@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#001f3f</color>
-    <color name="colorPrimaryDark">#0074D9</color>
-    <color name="colorAccent">#2ECC40</color>
+    <color name="colorPrimary">#1B262C</color>
+    <color name="colorPrimaryDark">#1B262C</color>
+    <color name="colorAccent">#3282b8</color>
+
+    <color name="x2colorPrimary">#001f3f</color>
+    <color name="x2colorPrimaryDark">#0074D9</color>
+    <color name="x2colorAccent">#2ECC40</color>
 
     <color name="xcolorPrimary">#008577</color>
     <color name="xcolorPrimaryDark">#00574B</color>
@@ -29,6 +33,7 @@
     <color name="Emerald_green">#50C878</color>
 
     <color name="set1_1">#1B262C</color>
+    <color name="set1_5">#1B261C</color>
     <color name="set1_2">#0F4C75</color>
     <color name="set1_3">#3282b8</color>
     <color name="set1_4">#bbe1fa</color>

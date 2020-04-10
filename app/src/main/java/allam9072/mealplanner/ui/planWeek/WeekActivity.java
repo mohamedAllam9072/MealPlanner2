@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,9 +30,10 @@ import allam9072.mealplanner.R;
 public class WeekActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     private int weekId;
     private RecyclerView recyclerView;
-    private TextView tv_Date;
     private WeekAdapter adapter;
+    private NestedAdapter nestedAdapter;
     private WeekViewModel viewModel;
+
 
 
     @Override
@@ -47,7 +47,8 @@ public class WeekActivity extends AppCompatActivity implements DatePickerDialog.
             @Override
             public void onChanged(List<WeekDaysRelation> weekDays) {
                 adapter.setWeekDays(weekDays.get(0).days);
-                tv_Date.setText(weekDays.get(0).week.getWeek_date());
+                getSupportActionBar().setTitle(weekDays.get(0).week.getWeek_name().toUpperCase()
+                        + "         " + weekDays.get(0).week.getWeek_date());
             }
         });
         adapter.setViewModel(viewModel);
@@ -56,7 +57,6 @@ public class WeekActivity extends AppCompatActivity implements DatePickerDialog.
 
     private void init() {
         //views
-        tv_Date = findViewById(R.id.tv_date);
         recyclerView = findViewById(R.id.rv_week_plan);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new WeekAdapter(getApplicationContext());
@@ -115,8 +115,8 @@ public class WeekActivity extends AppCompatActivity implements DatePickerDialog.
         calendar.set(Calendar.MONTH, month);
         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
         String dateString = DateFormat.getDateInstance().format(calendar.getTime());
+        getSupportActionBar().setTitle(dateString);
 
-        tv_Date.setText(dateString);
 
     }
 }
