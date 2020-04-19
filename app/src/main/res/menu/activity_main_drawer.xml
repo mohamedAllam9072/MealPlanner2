@@ -6,40 +6,44 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_home_24px"
             android:title="@string/menu_home" />
         <item
             android:id="@+id/nav_weeks"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_weeks"
             android:title="@string/menu_weeks" />
         <item
             android:id="@+id/nav_shoppingList"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_shopping_list"
             android:title="@string/menu_shopping_list" />
         <item
             android:id="@+id/nav_pantryList"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/ic_pantry_list"
             android:title="@string/menu_pantry_list" />
         <item
             android:id="@+id/nav_groceryList"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/ic_grocery"
             android:title="@string/menu_grocery_list" />
         <item
             android:id="@+id/nav_MyShoppingBasket"
-            android:icon="@drawable/ic_menu_send"
+            android:icon="@drawable/ic_shopping_basket"
             android:title="@string/menu_my_shopping_basket" />
         <item
             android:id="@+id/nav_todoList"
-            android:icon="@drawable/ic_menu_share"
+            android:icon="@drawable/ic_todo_list"
             android:title="@string/menu_todo_list" />
         <item
             android:id="@+id/nav_RecipesList"
-            android:icon="@drawable/ic_menu_send"
+            android:icon="@drawable/ic_recipes"
             android:title="@string/menu_recipes_list" />
         <item
             android:id="@+id/nav_meal"
-            android:icon="@drawable/ic_add_box"
+            android:icon="@drawable/ic_meals"
             android:title="@string/menu_meal" />
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/action_settings" />
     </group>
 
 

@@ -1,20 +1,17 @@
 package allam9072.mealplanner.ui.mainActivity;
 
 import android.os.Bundle;
+import android.view.Menu;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.Menu;
 
 import allam9072.mealplanner.R;
 
@@ -42,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_weeks, R.id.nav_shoppingList,
-                R.id.nav_pantryList, R.id.nav_groceryList, R.id.nav_MyShoppingBasket)
+                R.id.nav_pantryList, R.id.nav_groceryList, R.id.nav_MyShoppingBasket, R.id.nav_RecipesList)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
