@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="220dp"
+    android:layout_height="340dp"
+    android:layout_gravity="center">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_hi"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:elevation="10dp"
+        android:src="@drawable/food4"
+        app:civ_border_color="@color/set1_4"
+        app:civ_border_width="2dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="180dp"
+        android:layout_height="300dp"
+        android:elevation="10dp"
+        app:cardBackgroundColor="@color/set1_4"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="138dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv1_hi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="2"
+                android:padding="8dp"
+                android:text="Baked Shrimp Scampi"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/set2_1"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv2_hi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:padding="8dp"
+                android:text="Baked Shrimp Scampi"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/followers" />
+
+            <TextView
+                android:id="@+id/tv3_hi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/followers"
+                android:lines="1"
+                android:padding="8dp"
+                android:text="Baked Shrimp Scampi"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

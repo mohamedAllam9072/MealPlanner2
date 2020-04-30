@@ -11,6 +11,11 @@
         android:roundIcon="@drawable/ic_app"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:name=".ui.recipe_profile.RecipesProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
         <activity android:name=".TempActivity" />
         <activity
             android:name=".ui.ListActivity.ListActivity"

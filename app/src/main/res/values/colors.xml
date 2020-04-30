@@ -33,10 +33,34 @@
     <color name="Emerald_green">#50C878</color>
 
     <color name="set1_1">#1B262C</color>
-    <color name="set1_5">#1B261C</color>
+    <color name="set1_1_1">#141E22</color>
     <color name="set1_2">#0F4C75</color>
     <color name="set1_3">#3282b8</color>
     <color name="set1_4">#bbe1fa</color>
+    <color name="set1_4_1">#78C8FA</color>
+
+    <color name="set2_1">#2c4068</color>
+    <color name="set2_2">#245A3A</color>
+    <color name="set2_3">#00D589</color>
+    <color name="set2_4">#F46060</color>
+    <color name="set2_5">#9CAEC5</color>
+
+    <color name="start_blue">#09c6df</color>
+    <color name="end_blue">#09ccef</color>
+    <color name="back">#E8E8E8</color>
+    <color name="button">#3a4144</color>
+    <color name="gray_light">#fafafa</color>
+    <color name="address">#2F7092</color>
+    <color name="followers">#0D5D98</color>
+    <color name="headings">#3797CF</color>
+    <color name="solidCircle">#AAFFFFFF</color>
+    <color name="circleBorder">#50FFFFFF</color>
+    <color name="gradEnd">#67EFC8</color>
+    <color name="gradStart">#63C9FF</color>
+    <color name="map_bg">#84B262</color>
+    <color name="beacon_bg">#E85653</color>
+    <color name="grey">#E5E5E5</color>
+    <color name="white">#FFFFFF</color>
 
 
 </resources>
