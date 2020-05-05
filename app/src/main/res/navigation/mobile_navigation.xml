@@ -8,8 +8,12 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="allam9072.mealplanner.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_nav_home_to_nav_weeks"
+            app:destination="@id/nav_weeks" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_weeks"
@@ -45,9 +49,4 @@
         android:name="allam9072.mealplanner.ui.meals.MealsFragment"
         android:label="@string/menu_meal"
         tools:layout="@layout/meals_fragment" />
-    <fragment
-        android:id="@+id/recipesFragment"
-        android:name="allam9072.mealplanner.ui.list_Recipes.RecipesFragment"
-        android:label="recipes_fragment"
-        tools:layout="@layout/recipes_fragment" />
 </navigation>

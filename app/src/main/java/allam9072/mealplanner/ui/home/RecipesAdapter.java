@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,26 +16,47 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import allam9072.mealplanner.DB.Recipes;
 import allam9072.mealplanner.R;
 import allam9072.mealplanner.ui.recipe_profile.RecipesProfileActivity;
 
-public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.mVH> {
+public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.mVH> implements Filterable {
     private ArrayList<Recipes> recipes;
+    private ArrayList<Recipes> list2;
     private Context context;
+    private Filter filter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            ArrayList<Recipes> filtered_list = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0) {
+                filtered_list.addAll(list2);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (Recipes recipes : list2) {
+                    if (recipes.getName().toLowerCase().contains(filterPattern)) {
+                        filtered_list.add(recipes);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filtered_list;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            recipes.clear();
+            recipes.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public RecipesAdapter(Context context, ArrayList<Recipes> recipes) {
         this.recipes = recipes;
+        this.list2 = new ArrayList<>(recipes);
         this.context = context;
-    }
-
-    @NonNull
-    @Override
-    public mVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_rv_home_h, parent, false);
-        return new mVH(view);
     }
 
     @Override
@@ -59,16 +82,29 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.mVH> {
         return recipes.size();
     }
 
+    @NonNull
+    @Override
+    public mVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_rv_frag_home, parent, false);
+        return new mVH(view);
+    }
+
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
     public class mVH extends RecyclerView.ViewHolder {
         TextView tv_name, tv2, tv3;
         ImageView imageView;
 
         public mVH(@NonNull View itemView) {
             super(itemView);
-            tv_name = itemView.findViewById(R.id.tv1_hi);
-            tv2 = itemView.findViewById(R.id.tv2_hi);
-            tv3 = itemView.findViewById(R.id.tv3_hi);
-            imageView = itemView.findViewById(R.id.iv_hi);
+            tv_name = itemView.findViewById(R.id.tv_1_i_f_home);
+            tv2 = itemView.findViewById(R.id.tv_2_i_f_home);
+            tv3 = itemView.findViewById(R.id.tv_3_i_f_home);
+            imageView = itemView.findViewById(R.id.iv_i_f_home);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

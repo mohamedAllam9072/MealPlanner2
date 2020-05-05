@@ -11,14 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import allam9072.mealplanner.DB.Product;
 import allam9072.mealplanner.DB.m_Tables.MealProductsRelation;
-import allam9072.mealplanner.DB.m_Tables.ProductEntity;
 import allam9072.mealplanner.R;
 import allam9072.mealplanner.ui.product_profile.ProductProfileActivity;
 

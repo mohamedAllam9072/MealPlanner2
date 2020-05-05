@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">Meal Planner</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Mohamed Allam</string>
-    <string name="nav_header_subtitle">ان شاء الله يكون فاتحة خير</string>
+    <string name="nav_header_subtitle">allam9072@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_list">ListActivity</string>
@@ -16,23 +14,8 @@
     <string name="menu_my_shopping_basket">My Shopping Basket</string>
     <string name="new_week_plan">new week plan</string>
     <string name="menu_todo_list">Todo List</string>
-    <string name="menu_recipes_list">Recipes List</string>
-
-    <string name="watering_needs_prefix" translation_description="Prefix for the text describing how often a plant should be watered. Used in combination with watering_needs_suffix.">Watering needs</string>
-    <string name="plant_detail_image_content_description" translation_description="Content description for the header / hero image that is show at the top of the plant detail screen.">Image of plant</string>
-    <string name="todo">TODO</string>
-    <string name="description">Prefix for the text describing how often a plant should be watered. Used in combination with watering_needs_suffix.
-    Content description for the header / hero image that is show at the top of the plant detail screen.</string>
     <string name="menu_meal">meal</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <string name="a11y_plant_item_image" translation_description="Accessibility text for each of the plant images shown in the 'My garden' and 'Plant list' screens.">Picture of plant</string>
-    <string name="plant_date_header" translation_description="Text that is shown on each plant on the 'My Garden' screen which says the word Planted to show date of planting below">Planted</string>
-    <string name="watered_date_header" translation_description="Text that is shown on each plant on the 'My Garden' screen which says the word Last Watered to show date of last watering below">Last Watered</string>
-    <string name="star">Star</string>
-    <string name="x">Preheat the oven to 425 degrees F.\r\n\r\nDefrost shrimp by putting in cold water, drain. Place the shrimp in serving dish (9x13 or 2 quart casserole) and toss gently with the olive oil, wine, 1 teaspoons salt, and 1 teaspoon pepper. Allow to sit at room temperature while you make the butter and garlic mixture.\r\n\r\nIn a small bowl, mash the softened butter with the garlic, shallots, parsley, rosemary, red pepper flakes, lemon zest, lemon juice, egg yolk, panko, 1\/2 teaspoon salt, and 1\/4 teaspoon of pepper until combined.\r\n\r\nSpread the butter mixture evenly over the shrimp. Bake for 10 to 12 minutes until hot and bubbly. If you like the top browned, place under a broiler for 1-3 minutes (keep an eye on it). Serve with lemon wedges and French bread.\r\n\r\nNote: if using fresh shrimp, arrange for presentation. Starting from the outer edge of a 14-inch oval gratin dish, arrange the shrimp in a single layer cut side down with the tails curling up and towards the center of the dish. Pour the remaining marinade over the shrimp. ",
-        "ingredients":
-        "2\/3 cup panko\r 1\/4 teaspoon red pepper flakes\r1\/2 lemon, zested and juiced\r 1 extra-large egg yolk\r1 teaspoon rosemary, minced\r3 tablespoon parsley, minced\r4 clove garlic, minced\r1\/4 cup shallots, minced\r8 tablespoon unsalted butter, at room temperature\r 2 tablespoon dry white wine\rFreshly ground black pepper\rKosher salt\r3 tablespoon olive oil\r2 pound frozen shrimp</string>
+    <string name="todo">TODO</string>
+    <string name="frag_home_text_1">Today\'s Special</string>
+    <string name="frag_home_text_2">find your food</string>
 </resources>
