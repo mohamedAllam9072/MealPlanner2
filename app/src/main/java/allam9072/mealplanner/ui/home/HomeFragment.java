@@ -1,110 +1,98 @@
 package allam9072.mealplanner.ui.home;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.smarteist.autoimageslider.IndicatorAnimations;
-import com.smarteist.autoimageslider.SliderAnimations;
-import com.smarteist.autoimageslider.SliderView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import java.util.List;
+import java.util.ArrayList;
 
-import allam9072.mealplanner.DB.Category;
-import allam9072.mealplanner.DB.JsonAPI;
+import allam9072.mealplanner.DB.Recipes;
 import allam9072.mealplanner.R;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class HomeFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
-    private SliderView sliderView;
     private RecyclerView recyclerView;
-    adapter adapter;
-    List<Category> categoryList;
+    private ArrayList<Recipes> recipesList = new ArrayList<>();
+    private RecipesAdapter adapter;
+    private View view;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        sliderView = root.findViewById(R.id.imageSlider);
-
-        recyclerView = root.findViewById(R.id.rv);
-        setRecyclerView();
-        recyclerView.setFocusable(false);
-
-        setSlider();
-        retrofit();
-
-        return root;
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.fragment_home, container, false);
+        recyclerView = view.findViewById(R.id.rv_frag_home);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+        getAllData();
+        searchView();
+        goto_weeks();
+        return view;
     }
 
-    private void retrofit() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://5bcce576cf2e850013874767.mockapi.io/task/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        JsonAPI jsonAPI = retrofit.create(JsonAPI.class);
-
-        Call<List<Category>> call = jsonAPI.getAllCategories();
-        call.enqueue(new Callback<List<Category>>() {
+    private void searchView() {
+        SearchView searchView = view.findViewById(R.id.search_view);
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        searchView.setQueryHint("Search");
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
-                categoryList = response.body();
-                adapter = new adapter(getContext(), categoryList);
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+    }
+
+    private void getAllData() {
+        DatabaseReference reference;
+        reference = FirebaseDatabase.getInstance().getReference("root");
+        reference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Recipes recipes = snapshot.getValue(Recipes.class);
+                    recipesList.add(recipes);
+
+                }
+                adapter = new RecipesAdapter(getContext(), recipesList);
                 recyclerView.setAdapter(adapter);
             }
 
             @Override
-            public void onFailure(Call<List<Category>> call, Throwable t) {
-
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
-    private void setRecyclerView() {
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
-        layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+    private void goto_weeks() {
+        CardView cardView = view.findViewById(R.id.d5);
+        cardView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public int getSpanSize(int position) {
-                switch (adapter.getItemViewType(position)) {
-                    case 1:
-                        return 1;
-                    default:
-                        return 2;
-                }
+            public void onClick(View v) {
+                Navigation.findNavController(view).navigate(R.id.action_nav_home_to_nav_weeks);
             }
         });
-        recyclerView.setLayoutManager(layoutManager);
 
-    }
-
-    private void setSlider() {
-
-        SliderAdapterExample sliderAdapterExample = new SliderAdapterExample(getContext());
-        sliderView.setSliderAdapter(sliderAdapterExample);
-        sliderView.setIndicatorAnimation(IndicatorAnimations.WORM);
-        //set indicator animation by using SliderLayout.IndicatorAnimations.
-        // :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
-        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
-        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
-        sliderView.setIndicatorSelectedColor(Color.WHITE);
-        sliderView.setIndicatorUnselectedColor(Color.GRAY);
-        sliderView.setScrollTimeInSec(4); //set scroll delay in seconds :
-        sliderView.startAutoCycle();
     }
 }

@@ -1,5 +1,12 @@
 package allam9072.mealplanner.DB;
 
+import android.app.Application;
+import android.os.AsyncTask;
+
+import androidx.lifecycle.LiveData;
+
+import java.util.List;
+
 import allam9072.mealplanner.DB.m_Dao.dao_day;
 import allam9072.mealplanner.DB.m_Dao.dao_meal;
 import allam9072.mealplanner.DB.m_Dao.dao_product;
@@ -11,14 +18,8 @@ import allam9072.mealplanner.DB.m_Tables.MealEntity;
 import allam9072.mealplanner.DB.m_Tables.MealProductXRefEntity;
 import allam9072.mealplanner.DB.m_Tables.MealProductsRelation;
 import allam9072.mealplanner.DB.m_Tables.ProductEntity;
+import allam9072.mealplanner.DB.m_Tables.WeekDaysRelation;
 import allam9072.mealplanner.DB.m_Tables.WeekEntity;
-
-import android.app.Application;
-import android.os.AsyncTask;
-
-import androidx.lifecycle.LiveData;
-
-import java.util.List;
 
 public class Repo {
     private dao_week dao_week;
@@ -30,23 +31,29 @@ public class Repo {
     private LiveData<List<DayEntity>> allDays;
     private LiveData<List<MealEntity>> allMeals;
     private LiveData<List<ProductEntity>> allProducts;
-    private LiveData<List<MealProductsRelation>> MealProducts;
-    private LiveData<List<DayMealsRelation>> DayMeals;
+    private LiveData<List<MealProductsRelation>> mealProducts;
+
+    private LiveData<List<WeekDaysRelation>> weekDays;
+    private LiveData<List<DayMealsRelation>> dayMeals;
+    private LiveData<List<MealProductsRelation>> new_mealProducts;
+
 
     public Repo(Application application) {
         m_DataBase m_dataBase = m_DataBase.getInstance(application);
         dao_week = m_dataBase.dao_week();
-        allWeeks = dao_week.getAllWeeks();
         dao_day = m_dataBase.dao_day();
         dao_meal = m_dataBase.dao_meal();
         dao_product = m_dataBase.dao_product();
+
+        allWeeks = dao_week.getAllWeeks();
         allDays = dao_day.getAllDays();
         allMeals = dao_meal.getAllMeals();
         allProducts = dao_product.getAllProducts();
-        MealProducts = dao_meal.getNewMealProducts();
-        DayMeals = dao_day.getDayMeals();
+        mealProducts = dao_meal.getMealProducts();
+
 
     }
+
 
     /*** insert methods****************************************************************************************************/
     public void insert_week(WeekEntity weekEntity) {
@@ -74,6 +81,10 @@ public class Repo {
         new DeleteMealAsyncTask(dao_meal).execute(mealEntity);
     }
 
+    public void delete_meal_product(MealProductXRefEntity mealProductXRefEntity) {
+        new DeleteMealProductsXRefAsyncTask(dao_meal).execute(mealProductXRefEntity);
+    }
+
     /*** update methods****************************************************************************************************/
     public void update_meal(MealEntity mealEntity) {
         new UpdateMealAsyncTask(dao_meal).execute(mealEntity);
@@ -96,14 +107,28 @@ public class Repo {
         return allProducts;
     }
 
-    public LiveData<List<MealProductsRelation>> getMealProducts() {
-        return MealProducts;
-    }
-
     public LiveData<List<DayMealsRelation>> getDayMeals() {
-        return DayMeals;
+        return dayMeals;
     }
 
+    public LiveData<List<MealProductsRelation>> getMealProducts() {
+        return mealProducts;
+    }
+
+    public LiveData<List<WeekDaysRelation>> getWeekDays(int weekID) {
+        weekDays = dao_week.getWeekDays(weekID);
+        return weekDays;
+    }
+
+    public LiveData<List<DayMealsRelation>> getDayMeals(int dayID) {
+        dayMeals = dao_day.getDayMeals(dayID);
+        return dayMeals;
+    }
+
+    public LiveData<List<MealProductsRelation>> getNewMealProducts(int mealId) {
+        new_mealProducts = dao_meal.getMealByID(mealId);
+        return new_mealProducts;
+    }
     /*** ASYNC TASK methods****************************************************************************************************/
     /***** INSERT*/
     private static class InsertWeekAsyncTask extends AsyncTask<WeekEntity, Void, Void> {
@@ -190,6 +215,21 @@ public class Repo {
             return null;
         }
     }
+
+    private static class DeleteMealProductsXRefAsyncTask extends AsyncTask<MealProductXRefEntity, Void, Void> {
+        private dao_meal dao_meal;
+
+        public DeleteMealProductsXRefAsyncTask(dao_meal dao_meal) {
+            this.dao_meal = dao_meal;
+        }
+
+        @Override
+        protected Void doInBackground(MealProductXRefEntity... mealProducts) {
+            this.dao_meal.deleteMealProduct(mealProducts[0]);
+            return null;
+        }
+    }
+
 
     /****  UPDATE*/
     private static class UpdateMealAsyncTask extends AsyncTask<MealEntity, Void, Void> {

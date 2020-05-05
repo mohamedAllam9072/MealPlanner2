@@ -6,6 +6,11 @@
         android:icon="@drawable/ic_edit"
         android:title="meal title"
         app:showAsAction="ifRoom|collapseActionView" />
+    <item
+        android:id="@+id/add_new_product"
+        android:icon="@drawable/ic_add_box"
+        android:title="new_product"
+        app:showAsAction="ifRoom|collapseActionView" />
 
     <item
         android:id="@+id/save_meal"

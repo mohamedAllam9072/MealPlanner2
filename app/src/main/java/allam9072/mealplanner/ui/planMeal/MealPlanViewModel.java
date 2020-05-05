@@ -8,43 +8,57 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 import allam9072.mealplanner.DB.Repo;
-
 import allam9072.mealplanner.DB.m_Tables.MealEntity;
 import allam9072.mealplanner.DB.m_Tables.MealProductXRefEntity;
+import allam9072.mealplanner.DB.m_Tables.MealProductsRelation;
 import allam9072.mealplanner.DB.m_Tables.ProductEntity;
 
 public class MealPlanViewModel extends AndroidViewModel {
+    private Repo repo;
     private LiveData<List<ProductEntity>> AllProducts;
-    private Repo repository;
+    private LiveData<List<MealProductsRelation>> new_mealProducts;
+
 
     public MealPlanViewModel(Application application) {
         super(application);
-        repository = new Repo(application);
-        AllProducts = repository.getAllProducts();
+        repo = new Repo(application);
+        AllProducts = repo.getAllProducts();
     }
 
-    public void insert_meal(MealEntity meal) {
-        repository.insert_meal(meal);
-    }
-    void insert_product(ProductEntity product) {
-        repository.insert_product(product);
-    }
-    void insert_meal_product(MealProductXRefEntity mealProductXRef) {
-        repository.insert_meal_product(mealProductXRef);
-    }
-
-    void delete_meal(MealEntity meal) {
-        repository.delete_meal(meal);
-    }
-
-    void update_meal(MealEntity meal) {
-        repository.update_meal(meal);
+    public LiveData<List<MealProductsRelation>> getNew_mealProducts(int mealId) {
+        repo = new Repo(getApplication());
+        new_mealProducts = repo.getNewMealProducts(mealId);
+        return new_mealProducts;
     }
 
     public LiveData<List<ProductEntity>> getAllProducts() {
         return AllProducts;
     }
 
+
+    public void InsertMeal(MealEntity meal) {
+        repo.insert_meal(meal);
+    }
+
+    public void InsertProduct(ProductEntity product) {
+        repo.insert_product(product);
+    }
+
+    public void InsertMealProduct(MealProductXRefEntity mealProductXRef) {
+        repo.insert_meal_product(mealProductXRef);
+    }
+
+    void deleteMealProduct(MealProductXRefEntity mealProduct) {
+        repo.delete_meal_product(mealProduct);
+    }
+
+    void DeleteMeal(MealEntity meal) {
+        repo.delete_meal(meal);
+    }
+
+    void UpdateMeal(MealEntity meal) {
+        repo.update_meal(meal);
+    }
 
 
 }

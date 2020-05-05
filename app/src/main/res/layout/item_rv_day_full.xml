@@ -5,9 +5,9 @@
     android:id="@+id/cardView_weekView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/WHITE"
+    app:cardBackgroundColor="@color/set1_1"
     app:cardCornerRadius="8dp"
-    app:cardElevation="1dp"
+    app:cardElevation="2dp"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true">
 
@@ -23,7 +23,7 @@
             android:text="Sunday"
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/NAVY"
+            android:textColor="@color/TEAL"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,7 +34,7 @@
             android:text="Feb 04 "
             android:textAllCaps="true"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="@color/GREEN"
+            android:textColor="@color/TEAL"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:background="@color/WHITE"
+            android:background="@color/set1_1"
             android:padding="4dp"
             android:src="@drawable/ic_add"
             app:layout_constraintLeft_toLeftOf="parent"

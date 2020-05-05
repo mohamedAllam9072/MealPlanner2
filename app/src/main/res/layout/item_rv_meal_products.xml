@@ -10,10 +10,11 @@
         android:id="@+id/tv_mealTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Lunch"
+        android:text="Meal title"
         android:textAllCaps="true"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="@color/NAVY" />
+        android:textColor="@color/set1_4"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tv_mealProducts"
@@ -23,9 +24,9 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_weight="1"
-        android:text="Lunch , Lunch, Lunch"
+        android:text="Products"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="@color/OLIVE" />
+        android:textColor="@color/set1_3" />
 
 
 </LinearLayout>

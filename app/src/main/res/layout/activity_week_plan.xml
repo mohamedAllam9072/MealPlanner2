@@ -3,36 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/set1_1"
     tools:context=".ui.planWeek.WeekActivity">
 
-    <TextView
-        android:background="@color/WHITE"
-        android:id="@+id/tv_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="2dp"
-        android:textAllCaps="true"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/NAVY" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_week_plan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/btn_save_week_plan"
-        android:layout_below="@id/tv_date"
         tools:itemCount="7"
         tools:listitem="@layout/item_rv_day_full" />
 
-    <Button
-        android:id="@+id/btn_save_week_plan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/GREEN"
-        android:text="save week plan"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/WHITE" />
 
 </RelativeLayout>

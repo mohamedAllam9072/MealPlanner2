@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="220dp"
+    android:layout_height="340dp"
+    android:layout_gravity="center">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_i_f_home"
+        android:layout_width="170dp"
+        android:layout_height="170dp"
+        android:elevation="@dimen/elevation"
+        android:src="@drawable/x"
+        app:civ_border_color="@color/set1_4"
+        app:civ_border_width="2dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:targetApi="lollipop" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="180dp"
+        android:layout_height="300dp"
+        android:elevation="@dimen/elevation"
+        app:cardBackgroundColor="@color/set1_4"
+        app:cardCornerRadius="@dimen/card_radios_8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:targetApi="lollipop">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="138dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_1_i_f_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="2"
+                android:padding="@dimen/padding_8"
+                android:text="@string/app_name"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/set2_1"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_2_i_f_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:padding="@dimen/padding_8"
+                android:text="@string/app_name"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/followers" />
+
+            <TextView
+                android:id="@+id/tv_3_i_f_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:padding="@dimen/padding_8"
+                android:text="@string/app_name"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/followers" />
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

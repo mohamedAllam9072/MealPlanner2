@@ -1,79 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="8dp"
-    tools:context=".ui.planMeal.MealPlanActivity">
+    android:layout_height="match_parent">
 
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/v2"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:cardBackgroundColor="@color/BLUE"
-        app:cardCornerRadius="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/NAVY"
-        app:strokeWidth="2dp">
+        android:layout_height="match_parent"
+        android:background="@color/set1_1"
+        tools:context=".ui.planMeal.MealPlanActivity">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/v2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp">
+            app:cardBackgroundColor="@color/set1_1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/set1_1"
+            app:strokeWidth="1dp">
 
-            <TextView
-                android:id="@+id/tv_sp"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="4dp"
-                android:text="selected products"
-                android:textAllCaps="true"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColor="@color/WHITE"
-                android:textColorHighlight="@color/AQUA"
-                android:textColorLink="@color/BLUE"
-                app:layout_constraintBottom_toTopOf="@id/rv_selected_products"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:padding="8dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_selected_products"
-                android:layout_width="match_parent"
-                android:layout_height="175dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_sp"
-                tools:itemCount="4"
-                tools:listitem="@layout/item_rv_product_name" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tv_sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="4dp"
+                    android:text="selected products"
+                    android:textAllCaps="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/set1_3"
+                    android:textColorHighlight="@color/set1_4"
+                    android:textColorLink="@color/set1_1"
+                    app:layout_constraintBottom_toTopOf="@id/rv_selected_products"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_meal_products"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/v2"
-        tools:listitem="@layout/item_rv_product_name" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_add_product"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:src="@drawable/ic_add"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_selected_products"
+                    android:layout_width="match_parent"
+                    android:layout_height="175dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_sp"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/item_rv_product_name" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_meal_products"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/v2"
+            tools:listitem="@layout/item_rv_product_x" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.core.widget.NestedScrollView>

@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +18,6 @@ import allam9072.mealplanner.R;
 public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.mVH> {
     private List<WeekEntity> weeksList = new ArrayList<>();
     private listener listener;
-
-
 
     @NonNull
     @Override
@@ -30,12 +30,8 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.mVH> {
     @Override
     public void onBindViewHolder(@NonNull mVH holder, int position) {
         holder.textView1.setText(weeksList.get(position).getWeek_name());
-        holder.textView2.setText(weeksList.get(position).getWeek_name());
+        holder.textView2.setText(weeksList.get(position).getWeek_date());
     }
-
-    /**
-     * this method refer to observes in Main_activity view_model calling
-     */
     public void setWeeks(List<WeekEntity> weeks) {
         this.weeksList = weeks;
         notifyDataSetChanged();
@@ -49,6 +45,7 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.mVH> {
 
     public class mVH extends RecyclerView.ViewHolder {
         TextView textView1, textView2;
+
         public mVH(@NonNull View itemView) {
             super(itemView);
             textView1 = itemView.findViewById(R.id.tv_weekTitle);
@@ -63,9 +60,6 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.mVH> {
         }
     }
 
-    public WeekEntity getWeekAt(int position) {
-        return weeksList.get(position);
-    }
 
     public interface listener {
         void click(WeekEntity week);
