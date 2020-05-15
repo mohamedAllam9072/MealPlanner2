@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,7 +29,6 @@ import allam9072.mealplanner.R;
 
 
 public class HomeFragment extends Fragment {
-
     private RecyclerView recyclerView;
     private ArrayList<Recipes> recipesList = new ArrayList<>();
     private RecipesAdapter adapter;
@@ -39,6 +39,7 @@ public class HomeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rv_frag_home);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
         getAllData();
+
         searchView();
         goto_weeks();
         return view;
@@ -47,7 +48,7 @@ public class HomeFragment extends Fragment {
     private void searchView() {
         SearchView searchView = view.findViewById(R.id.search_view);
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        searchView.setQueryHint("Search");
+        searchView.setQueryHint("search");
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -64,18 +65,20 @@ public class HomeFragment extends Fragment {
     }
 
     private void getAllData() {
-        DatabaseReference reference;
-        reference = FirebaseDatabase.getInstance().getReference("root");
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference reference = firebaseDatabase.getReference("root");
+        final TextView tv_recipes_number = view.findViewById(R.id.tv_recipes_number);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Recipes recipes = snapshot.getValue(Recipes.class);
                     recipesList.add(recipes);
-
+                    tv_recipes_number.setText(recipesList.size() + " Recipes");
                 }
                 adapter = new RecipesAdapter(getContext(), recipesList);
                 recyclerView.setAdapter(adapter);
+
             }
 
             @Override
@@ -83,6 +86,7 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     private void goto_weeks() {

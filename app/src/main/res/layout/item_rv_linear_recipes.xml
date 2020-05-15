@@ -12,7 +12,7 @@
         android:layout_height="65dp"
         android:layout_margin="16dp"
         android:elevation="8dp"
-        app:cardBackgroundColor="@color/set1_1"
+        app:cardBackgroundColor="@color/set1_4"
         app:cardCornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,42 +25,41 @@
             android:layout_marginLeft="65dp">
 
             <TextView
-                android:id="@+id/tv_recipe_name"
+                android:id="@+id/tv1_linear_recipe_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:lines="1"
                 android:padding="4dp"
                 android:text="recipe name"
-                android:textAllCaps="true"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/set1_3" />
+                android:textColor="@color/set2_1"
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/tv2_recipe"
+                android:id="@+id/tv2_linear_recipe_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_recipe_name"
+                android:layout_below="@id/tv1_linear_recipe_item"
                 android:layout_marginTop="4dp"
                 android:ellipsize="end"
                 android:lines="1"
-                android:text="01024089598"
+                android:text=""
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/set1_4" />
 
             <TextView
-                android:id="@+id/tv3_recipe"
-
+                android:id="@+id/tv3_linear_recipe_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_recipe_name"
+                android:layout_below="@id/tv1_linear_recipe_item"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="4dp"
-                android:layout_toEndOf="@id/tv2_recipe"
-                android:layout_toRightOf="@id/tv2_recipe"
+                android:layout_toEndOf="@id/tv2_linear_recipe_item"
+                android:layout_toRightOf="@id/tv2_linear_recipe_item"
                 android:ellipsize="end"
                 android:lines="1"
-                android:text="cairo"
+                android:text=""
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColor="@color/set1_4" />
 
@@ -68,23 +67,17 @@
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_linear_recipe_item"
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:layout_margin="4dp"
         android:elevation="8dp"
+        android:src="@drawable/x"
         app:cardBackgroundColor="@color/set1_1"
-        app:cardCornerRadius="16dp"
+        app:civ_border_color="@color/set1_4"
+        app:civ_border_width="1dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/iv_recipe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:scaleType="fitCenter"
-            android:src="@drawable/image2" />
-    </androidx.cardview.widget.CardView>
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

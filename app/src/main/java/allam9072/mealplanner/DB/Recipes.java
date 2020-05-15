@@ -8,7 +8,11 @@ public class Recipes {
     private String comments;
     private String instructions;
     private String ingredients;
-    private String tags;
+    private String tag1;
+    private String tag2;
+    private String tag3;
+    private String tag4;
+    private String tag5;
     private int preptime;
     private int waittime;
     private int cooktime;
@@ -25,26 +29,30 @@ public class Recipes {
     public Recipes() {
     }
 
-    public Recipes(String id, String image1, String name, String source,
-                   int preptime, int waittime, int cooktime, int servings, String comments, int calories,
-                   int fat, int carbs, int fiber, String instructions,
-                   String ingredients, String tags, int protein, int satfat, int sugar) {
+    public Recipes(String id, String image1, String name, String source, String comments,
+                   String instructions, String ingredients, String tag1, String tag2, String tag3,
+                   String tag4, String tag5, int preptime, int waittime, int cooktime, int servings, int calories,
+                   int fat, int carbs, int fiber, int protein, int satfat, int sugar) {
         this.id = id;
         this.image1 = image1;
         this.name = name;
         this.source = source;
+        this.comments = comments;
+        this.instructions = instructions;
+        this.ingredients = ingredients;
+        this.tag1 = tag1;
+        this.tag2 = tag2;
+        this.tag3 = tag3;
+        this.tag4 = tag4;
+        this.tag5 = tag5;
         this.preptime = preptime;
         this.waittime = waittime;
         this.cooktime = cooktime;
         this.servings = servings;
-        this.comments = comments;
         this.calories = calories;
         this.fat = fat;
         this.carbs = carbs;
         this.fiber = fiber;
-        this.instructions = instructions;
-        this.ingredients = ingredients;
-        this.tags = tags;
         this.protein = protein;
         this.satfat = satfat;
         this.sugar = sugar;
@@ -110,10 +118,6 @@ public class Recipes {
         return ingredients;
     }
 
-    public String getTags() {
-        return tags;
-    }
-
     public int getProtein() {
         return protein;
     }
@@ -124,5 +128,25 @@ public class Recipes {
 
     public int getSugar() {
         return sugar;
+    }
+
+    public String getTag1() {
+        return tag1;
+    }
+
+    public String getTag2() {
+        return tag2;
+    }
+
+    public String getTag3() {
+        return tag3;
+    }
+
+    public String getTag4() {
+        return tag4;
+    }
+
+    public String getTag5() {
+        return tag5;
     }
 }
