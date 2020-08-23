@@ -16,7 +16,7 @@ import allam9072.mealplanner.R;
 public class RecipeIntsAdapter extends RecyclerView.Adapter<RecipeIntsAdapter.mVH> {
     ArrayList<recipeInts> recipeInts;
 
-    public RecipeIntsAdapter(ArrayList<allam9072.mealplanner.DB.recipeInts> recipeInts) {
+    public RecipeIntsAdapter(ArrayList<recipeInts> recipeInts) {
         this.recipeInts = recipeInts;
     }
 

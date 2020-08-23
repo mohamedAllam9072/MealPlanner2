@@ -24,45 +24,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <!--icon link-->
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/iv_rd_link_icon"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_margin="8dp"
-                    android:elevation="8dp"
-                    android:src="@drawable/ic_link_black_24dp"
-                    app:civ_border_color="@color/set1_2"
-                    app:civ_border_overlay="true"
-                    app:civ_circle_background_color="@color/set1_1"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-                <!--icon favorite -->
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/iv_rd_favorite_icon"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_margin="8dp"
-                    android:elevation="8dp"
-                    android:src="@drawable/ic_favorite_border"
-                    app:civ_border_color="@color/set1_2"
-                    app:civ_border_overlay="true"
-                    app:civ_circle_background_color="@color/set1_1"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iv_rd_link_icon" />
-                <!--icon timers -->
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/iv_rd_timers_icon"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_margin="8dp"
-                    android:elevation="8dp"
-                    android:src="@drawable/ic_timer_black_24dp"
-                    app:civ_border_color="@color/set1_2"
-                    app:civ_border_overlay="true"
-                    app:civ_circle_background_color="@color/set1_1"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iv_rd_favorite_icon" />
                 <!--recipe image-->
                 <ImageView
                     android:id="@+id/iv_rd_main_image"
@@ -77,10 +38,14 @@
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/detail_toolbar"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -133,175 +98,312 @@
                 tools:itemCount="1"
                 tools:listitem="@layout/item_rv_recipe_integers" />
             <!-- ingredients layout-->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_marginTop="16dp"
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/z6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="@dimen/padding_8"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rv_rd_integers">
+                app:layout_constraintTop_toBottomOf="@id/rv_rd_integers"
+                app:strokeColor="@color/set1_1"
+                app:strokeWidth="1dp">
 
-                <ImageView
-                    android:id="@+id/z7"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_margin="2dp"
-                    android:src="@drawable/ic_ingredients"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="32dp"
-                    android:gravity="center"
-                    android:paddingLeft="4dp"
-                    android:text="Ingredients"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    app:layout_constraintLeft_toRightOf="@id/z7"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_ingredients_rd"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="2dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textColor="@color/set1_1_1"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/z7" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/padding_8">
+
+                    <ImageView
+                        android:id="@+id/z7"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_margin="2dp"
+                        android:src="@drawable/ic_ingredients"
+                        app:layout_constraintRight_toLeftOf="@id/z9"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/z9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:gravity="center"
+                        android:paddingLeft="4dp"
+                        android:text="Ingredients"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_ingredients_rd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/set1_1_1"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/z7" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
             <!-- instructions layout-->
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/z1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="@dimen/padding_8"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/z6">
+                app:layout_constraintTop_toBottomOf="@id/rv_tags_rd"
+                app:strokeColor="@color/set1_1"
+                app:strokeWidth="1dp">
 
-                <ImageView
-                    android:id="@+id/z2"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_margin="2dp"
-                    android:src="@drawable/ic_instructions_guide"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="32dp"
-                    android:gravity="center"
-                    android:paddingLeft="4dp"
-                    android:text="Instructions"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    app:layout_constraintLeft_toRightOf="@id/z2"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_instructions_rd"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="2dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textColor="@color/set1_1_1"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/z2" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/margin_8">
+
+                    <ImageView
+                        android:id="@+id/z2"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_margin="2dp"
+                        android:src="@drawable/ic_instructions_guide"
+                        app:layout_constraintRight_toLeftOf="@id/z10"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/z10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:gravity="center"
+                        android:paddingLeft="4dp"
+                        android:text="Instructions"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_instructions_rd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/set1_1_1"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/z2" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+            <!-- Timers -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/z12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="@dimen/padding_8"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/z1"
+                app:strokeColor="@color/set1_1"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/padding_8">
+
+                    <ImageView
+                        android:id="@+id/z13"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_margin="2dp"
+                        android:src="@drawable/ic_timer"
+                        app:layout_constraintRight_toLeftOf="@id/z14"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/z14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:gravity="center"
+                        android:paddingLeft="4dp"
+                        android:text="Timers"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <!--preparing time -->
+                    <LinearLayout
+                        android:id="@+id/l1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="@dimen/padding_8"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/z14">
+
+                        <TextView
+                            android:id="@+id/tv_prep_time_rd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="1"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            android:textColor="@color/set1_1"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="seconds\nPreparing Time"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/set1_1" />
+                    </LinearLayout>
+                    <!--wait time -->
+                    <LinearLayout
+                        android:id="@+id/l2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/padding_8"
+                        app:layout_constraintLeft_toRightOf="@id/l1"
+                        app:layout_constraintTop_toBottomOf="@id/z14">
+
+                        <TextView
+                            android:id="@+id/tv_wait_time_rd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="2"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            android:textColor="@color/set1_1"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="seconds\nWaiting Time"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/set1_1" />
+                    </LinearLayout>
+                    <!--Cook time -->
+                    <LinearLayout
+                        android:id="@+id/l3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="@dimen/padding_8"
+                        app:layout_constraintLeft_toRightOf="@id/l2"
+                        app:layout_constraintTop_toBottomOf="@id/z14">
+
+                        <TextView
+                            android:id="@+id/tv_cook_time_rd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="3"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                            android:textColor="@color/set1_1"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text="seconds\nCooking Time"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:textColor="@color/set1_1" />
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
             <!-- comments layout-->
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/z3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="@dimen/padding_8"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/z1">
+                app:layout_constraintTop_toBottomOf="@id/z12"
+                app:strokeColor="@color/set1_1"
+                app:strokeWidth="1dp">
 
-                <ImageView
-                    android:id="@+id/z4"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_margin="2dp"
-                    android:src="@drawable/ic_comment"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="32dp"
-                    android:gravity="center"
-                    android:paddingLeft="4dp"
-                    android:text="Comments"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    app:layout_constraintLeft_toRightOf="@id/z4"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_comments_rd"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="2dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textColor="@color/set1_1_1"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/z4" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <!-- tags layout-->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/padding_8">
+
+                    <ImageView
+                        android:id="@+id/z4"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_margin="2dp"
+                        android:src="@drawable/ic_comment"
+                        app:layout_constraintRight_toLeftOf="@id/z11"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/z11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:gravity="center"
+                        android:paddingLeft="4dp"
+                        android:text="Comments"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_comments_rd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/set1_1_1"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/z4" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+            <!--tags-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_tags_rd"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding_8"
+                android:foregroundGravity="center"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/z3">
-
-                <ImageView
-                    android:id="@+id/z5"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_margin="2dp"
-                    android:src="@drawable/ic_tag"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="32dp"
-                    android:gravity="center"
-                    android:text="Tags"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    app:layout_constraintLeft_toRightOf="@id/z5"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_tags_rd"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="2dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textColor="@color/set1_1_1"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/z5" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintTop_toBottomOf="@id/z6"
+                tools:listitem="@layout/item_rv_tag" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_to_cart"
-        style="@style/Widget.MaterialComponents.FloatingActionButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|start"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_add"
-        android:tint="@android:color/white"
-        app:layout_anchor="@id/plant_detail_scrollview"
-        app:layout_anchorGravity="top|end" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
