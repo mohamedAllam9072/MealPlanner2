@@ -48,20 +48,21 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.mVH> {
     public void onBindViewHolder(@NonNull final NestedAdapter.mVH holder, final int position) {
 
         holder.tv_mealTitle.setText(meals.get(position).getMeal_name());
+        holder.tv_mealProducts.setText("time");
 
-        viewModel.getMealProducts(meals.get(position).getMealId())
-                .observe(lifecycleOwner, new Observer<List<MealProductsRelation>>() {
-                    @Override
-                    public void onChanged(List<MealProductsRelation> mealProducts) {
-                        setProducts(mealProducts.get(0).products);
-                        String s = " ";
-                        for (int i = 0; i < products.size(); i++) {
-                            s += products.get(i).getProduct_name() + " ";
-
-                        }
-                        holder.tv_mealProducts.setText(s);
-                    }
-                });
+//        viewModel.getMealProducts(meals.get(position).getMealId())
+//                .observe(lifecycleOwner, new Observer<List<MealProductsRelation>>() {
+//                    @Override
+//                    public void onChanged(List<MealProductsRelation> mealProducts) {
+//                        setProducts(mealProducts.get(0).products);
+//                        String s = " ";
+//                        for (int i = 0; i < products.size(); i++) {
+//                            s += products.get(i).getProduct_name() + " ";
+//
+//                        }
+//                        holder.tv_mealProducts.setText(s);
+//                    }
+//                });
 
 
 
