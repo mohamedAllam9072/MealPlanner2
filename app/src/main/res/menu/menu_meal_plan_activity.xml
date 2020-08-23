@@ -1,22 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/edit_meal_title"
         android:icon="@drawable/ic_edit"
-        android:title="meal title"
-        app:showAsAction="ifRoom|collapseActionView" />
+        android:title="edit meal title" />
     <item
         android:id="@+id/add_new_product"
         android:icon="@drawable/ic_add_box"
-        android:title="new_product"
-        app:showAsAction="ifRoom|collapseActionView" />
-
-    <item
-        android:id="@+id/save_meal"
-        android:icon="@drawable/ic_done"
-        android:title="save"
-        app:showAsAction="ifRoom|collapseActionView" />
+        android:title="add new product" />
 
 
 </menu>

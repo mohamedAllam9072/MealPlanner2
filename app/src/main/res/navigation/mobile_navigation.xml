@@ -49,5 +49,14 @@
         android:name="allam9072.mealplanner.ui.favorite.FavoriteFragment"
         android:label="@string/favorite"
         tools:layout="@layout/favorite_fragment" />
+    <activity
+        android:id="@+id/mealPlanActivity"
+        android:name="allam9072.mealplanner.ui.planMeal.MealPlanActivity"
+        android:label="MealPlanActivity" />
+    <fragment
+        android:id="@+id/selectedProductsFragment"
+        android:name="allam9072.mealplanner.SelectedProductsFragment"
+        android:label="selected_products_fragment"
+        tools:layout="@layout/selected_products_fragment" />
 
 </navigation>
