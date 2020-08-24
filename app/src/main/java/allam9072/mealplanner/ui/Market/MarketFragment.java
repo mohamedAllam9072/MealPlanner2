@@ -1,8 +1,14 @@
-package allam9072.mealplanner.ui.market;
+package allam9072.mealplanner.ui.Market;
+
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,17 +24,20 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MarketActivity extends AppCompatActivity {
+public class MarketFragment extends Fragment {
+
+    private MarketViewModel mViewModel;
     private RecyclerView recyclerView;
     private List<Category_market> categoryList = new ArrayList<>();
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_market);
-        recyclerView = findViewById(R.id.rv_market);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.market_fragment, container, false);
+        recyclerView = view.findViewById(R.id.rv_market);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         retrofit();
+        return view;
     }
 
     private void retrofit() {
@@ -44,7 +53,7 @@ public class MarketActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Category_market>> call, Response<List<Category_market>> response) {
                 categoryList = response.body();
-                MarketAdapter adapter = new MarketAdapter(categoryList, getApplicationContext());
+                MarketAdapter adapter = new MarketAdapter(categoryList, getContext());
                 recyclerView.setAdapter(adapter);
             }
 
@@ -54,5 +63,6 @@ public class MarketActivity extends AppCompatActivity {
             }
         });
     }
-}
 
+
+}

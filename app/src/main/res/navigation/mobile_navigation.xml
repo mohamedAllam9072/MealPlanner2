@@ -14,8 +14,8 @@
             android:id="@+id/action_nav_home_to_nav_weeks"
             app:destination="@id/nav_weeks" />
         <action
-            android:id="@+id/action_nav_home_to_marketActivity"
-            app:destination="@id/marketActivity" />
+            android:id="@+id/action_nav_home_to_marketFragment"
+            app:destination="@id/marketFragment" />
     </fragment>
 
     <fragment
@@ -52,10 +52,18 @@
         android:name="allam9072.mealplanner.ui.favorite.FavoriteFragment"
         android:label="@string/favorite"
         tools:layout="@layout/favorite_fragment" />
-    <activity
-        android:id="@+id/marketActivity"
-        android:name="allam9072.mealplanner.ui.market.MarketActivity"
-        android:label="activity_market"
-        tools:layout="@layout/activity_market" />
+    <fragment
+        android:id="@+id/categroyDetailsFragment"
+        android:name="allam9072.mealplanner.ui.Market.CategroyDetailsFragment"
+        android:label="categroy_details_fragment"
+        tools:layout="@layout/categroy_details_fragment" />
+    <fragment
+        android:id="@+id/marketFragment"
+        android:name="allam9072.mealplanner.ui.Market.MarketFragment"
+        android:label="MarketFragment">
+        <action
+            android:id="@+id/action_marketFragment_to_categroyDetailsFragment"
+            app:destination="@id/categroyDetailsFragment" />
+    </fragment>
 
 </navigation>

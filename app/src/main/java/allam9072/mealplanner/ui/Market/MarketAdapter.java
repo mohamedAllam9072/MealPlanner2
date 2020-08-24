@@ -1,6 +1,7 @@
-package allam9072.mealplanner.ui.market;
+package allam9072.mealplanner.ui.Market;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -63,6 +65,17 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.mVH> {
             super(itemView);
             imageView = itemView.findViewById(R.id.iv_item_market);
             textView = itemView.findViewById(R.id.tv_item_market);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle args = new Bundle();
+                    args.putInt("cat_id", market_categories.get(getAdapterPosition()).getCat_id());
+                    args.putString("cat_name", market_categories.get(getAdapterPosition()).getCat_name());
+                    args.putString("cat_image", market_categories.get(getAdapterPosition()).getCat_image());
+                    Navigation.findNavController(v).navigate(R.id.action_marketFragment_to_categroyDetailsFragment, args);
+                }
+            });
+
         }
     }
 }

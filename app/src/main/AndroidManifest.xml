@@ -10,7 +10,6 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_app"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.market.MarketActivity"></activity>
         <activity
             android:name=".ui.recipe_profile.RecipesProfileActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
