@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_nav_home_to_nav_weeks"
             app:destination="@id/nav_weeks" />
+        <action
+            android:id="@+id/action_nav_home_to_marketActivity"
+            app:destination="@id/marketActivity" />
     </fragment>
 
     <fragment
@@ -50,13 +53,9 @@
         android:label="@string/favorite"
         tools:layout="@layout/favorite_fragment" />
     <activity
-        android:id="@+id/mealPlanActivity"
-        android:name="allam9072.mealplanner.ui.planMeal.MealPlanActivity"
-        android:label="MealPlanActivity" />
-    <fragment
-        android:id="@+id/selectedProductsFragment"
-        android:name="allam9072.mealplanner.SelectedProductsFragment"
-        android:label="selected_products_fragment"
-        tools:layout="@layout/selected_products_fragment" />
+        android:id="@+id/marketActivity"
+        android:name="allam9072.mealplanner.ui.market.MarketActivity"
+        android:label="activity_market"
+        tools:layout="@layout/activity_market" />
 
 </navigation>
