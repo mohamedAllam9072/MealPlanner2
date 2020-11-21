@@ -1,6 +1,13 @@
 package allam9072.mealplanner.DB;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Recipes {
+    @PrimaryKey
+    @NonNull
     private String id;
     private String image1;
     private String name;
@@ -147,6 +154,101 @@ public class Recipes {
     }
 
     public String getTag5() {
+<<<<<<< HEAD
         return tag5;
+=======
+        return tag5;}
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setImage1(String image1) {
+        this.image1 = image1;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
+    }
+
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public void setTag1(String tag1) {
+        this.tag1 = tag1;
+    }
+
+    public void setTag2(String tag2) {
+        this.tag2 = tag2;
+    }
+
+    public void setTag3(String tag3) {
+        this.tag3 = tag3;
+    }
+
+    public void setTag4(String tag4) {
+        this.tag4 = tag4;
+    }
+
+    public void setTag5(String tag5) {
+        this.tag5 = tag5;
+    }
+
+    public void setPreptime(int preptime) {
+        this.preptime = preptime;
+    }
+
+    public void setWaittime(int waittime) {
+        this.waittime = waittime;
+    }
+
+    public void setCooktime(int cooktime) {
+        this.cooktime = cooktime;
+    }
+
+    public void setServings(int servings) {
+        this.servings = servings;
+    }
+
+    public void setCalories(int calories) {
+        this.calories = calories;
+    }
+
+    public void setFat(int fat) {
+        this.fat = fat;
+    }
+
+    public void setCarbs(int carbs) {
+        this.carbs = carbs;
+    }
+
+    public void setFiber(int fiber) {
+        this.fiber = fiber;
+    }
+
+    public void setProtein(int protein) {
+        this.protein = protein;
+    }
+
+    public void setSatfat(int satfat) {
+        this.satfat = satfat;
+    }
+
+    public void setSugar(int sugar) {
+        this.sugar = sugar;
+>>>>>>> 5b85b402d9001178bead429d35c7e4c6fb830356
     }
 }

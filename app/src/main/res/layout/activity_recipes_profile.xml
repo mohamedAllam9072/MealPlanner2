@@ -296,9 +296,15 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 app:cardCornerRadius="@dimen/padding_8"
+<<<<<<< HEAD
                 app:layout_constraintTop_toBottomOf="@id/z1"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
+=======
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/z1"
+>>>>>>> 5b85b402d9001178bead429d35c7e4c6fb830356
                 app:strokeColor="@color/set1_1"
                 app:strokeWidth="1dp">
 

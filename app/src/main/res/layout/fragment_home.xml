@@ -82,7 +82,7 @@
                 android:layout_gravity="center"
                 android:background="@color/BLUE"
                 android:contentDescription="@string/todo"
-                android:src="@drawable/ic_view_week" />
+                android:src="@drawable/ic_shopping_cart" />
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>

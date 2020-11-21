@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,7 +22,6 @@ public class MealPlanNestedAdapter extends RecyclerView.Adapter<MealPlanNestedAd
     private List<ProductEntity> mealProductsList = new ArrayList<>();
     private deleteListener deleteListener;
 
-
     public MealPlanNestedAdapter(Context context, deleteListener deleteListener) {
         this.context = context;
         this.deleteListener = deleteListener;
@@ -33,7 +31,7 @@ public class MealPlanNestedAdapter extends RecyclerView.Adapter<MealPlanNestedAd
     @Override
     public mVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_rv_product_name, parent, false);
+                .inflate(R.layout.item_rv_product_x2, parent, false);
         return new mVH(view, deleteListener);
     }
 
@@ -43,14 +41,14 @@ public class MealPlanNestedAdapter extends RecyclerView.Adapter<MealPlanNestedAd
 
     }
 
-    public void setMealProductsList(List<ProductEntity> mealProductsList) {
-        this.mealProductsList = mealProductsList;
-        notifyDataSetChanged();
-    }
-
     @Override
     public int getItemCount() {
         return mealProductsList.size();
+    }
+
+    public void setMealProductsList(List<ProductEntity> mealProductsList) {
+        this.mealProductsList = mealProductsList;
+        notifyDataSetChanged();
     }
 
     public interface deleteListener {
@@ -59,13 +57,11 @@ public class MealPlanNestedAdapter extends RecyclerView.Adapter<MealPlanNestedAd
 
     public class mVH extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView textView;
-        ImageButton imageButton;
         deleteListener deleteListener;
 
-        public mVH(@NonNull View itemView, deleteListener deleteListener) {
+        public mVH(@NonNull View itemView, final deleteListener deleteListener) {
             super(itemView);
-            textView = itemView.findViewById(R.id.tv_product_title);
-            imageButton = itemView.findViewById(R.id.btn_delete_product);
+            textView = itemView.findViewById(R.id.tv_product);
             this.deleteListener = deleteListener;
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -75,7 +71,13 @@ public class MealPlanNestedAdapter extends RecyclerView.Adapter<MealPlanNestedAd
                     context.startActivity(intent);
                 }
             });
-            imageButton.setOnClickListener(this);
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    deleteListener.delete_click(getAdapterPosition());
+                    return false;
+                }
+            });
         }
 
         @Override
@@ -84,5 +86,4 @@ public class MealPlanNestedAdapter extends RecyclerView.Adapter<MealPlanNestedAd
 
         }
     }
-
 }

@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-
         android:allowBackup="true"
         android:icon="@drawable/ic_app"
         android:label="@string/app_name"
@@ -13,10 +12,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.recipe_profile.RecipesProfileActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".ui.product_profile.ProductProfileActivity"
             android:label="@string/title_activity_list"

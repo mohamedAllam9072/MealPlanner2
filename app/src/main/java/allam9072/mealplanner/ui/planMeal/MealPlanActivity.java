@@ -15,19 +15,18 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
 
-import allam9072.mealplanner.DB.m_Tables.MealEntity;
 import allam9072.mealplanner.DB.m_Tables.MealProductXRefEntity;
 import allam9072.mealplanner.DB.m_Tables.MealProductsRelation;
 import allam9072.mealplanner.DB.m_Tables.ProductEntity;
 import allam9072.mealplanner.R;
-import allam9072.mealplanner.ui.planWeek.WeekActivity;
 
 import static allam9072.mealplanner.ui.planMeal.MealPlanAdapter.mOnClickListener;
 import static allam9072.mealplanner.ui.planMeal.MealPlanNestedAdapter.deleteListener;
@@ -35,6 +34,8 @@ import static allam9072.mealplanner.ui.planMeal.MealPlanNestedAdapter.deleteList
 
 public class MealPlanActivity extends AppCompatActivity implements mOnClickListener, deleteListener {
     private RecyclerView rv_products, rv_selected_products;
+    private MaterialCardView cardView;
+    private TextView tv_num_products;
     private MealPlanAdapter MainAdapter;
     private MealPlanNestedAdapter NestedAdapter;
     private MealPlanViewModel viewModel;
@@ -47,8 +48,40 @@ public class MealPlanActivity extends AppCompatActivity implements mOnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal_plan);
 
-        init();
 
+        init();
+        viewModel();
+
+
+    }
+
+    private void init() {
+        tv_num_products = findViewById(R.id.tv_number_of_meal_products);
+        rv_products = findViewById(R.id.rv_meal_products);
+        cardView = findViewById(R.id.v2);
+        //ActionBar
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.set1_1)));
+        //Nested Adapter
+        NestedAdapter = new MealPlanNestedAdapter(getApplicationContext(), this);
+        //getIntentFormParent
+        Intent intent = getIntent();
+        mealId = intent.getIntExtra("mealId", 1);
+        //rv_products
+        rv_products.setLayoutManager(new LinearLayoutManager(this));
+        MainAdapter = new MealPlanAdapter(this);
+        rv_products.setAdapter(MainAdapter);
+        //cardView
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedListDialog();
+            }
+        });
+    }
+
+    private void viewModel() {
+        viewModel = ViewModelProviders.of(this).get(MealPlanViewModel.class);
         viewModel.getAllProducts().observe(this, new Observer<List<ProductEntity>>() {
             @Override
             public void onChanged(List<ProductEntity> products) {
@@ -59,115 +92,29 @@ public class MealPlanActivity extends AppCompatActivity implements mOnClickListe
             @Override
             public void onChanged(List<MealProductsRelation> mealProductsRelations) {
                 NestedAdapter.setMealProductsList(mealProductsRelations.get(0).products);
+                tv_num_products.setText("" + mealProductsRelations.get(0).products.size());
                 mealTitle = mealProductsRelations.get(0).meal.getMeal_name();
                 getSupportActionBar().setTitle(mealTitle);
             }
         });
-
-
     }
 
-    private void init() {
-        //view model
-        viewModel = ViewModelProviders.of(this).get(MealPlanViewModel.class);
-        //xmlViews
-        getSupportActionBar().setHomeButtonEnabled(true);
-
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.set1_1)));
-        rv_products = findViewById(R.id.rv_meal_products);
-        rv_selected_products = findViewById(R.id.rv_selected_products);
-
-        // getIntentFormParent();
-        Intent intent = getIntent();
-        mealId = intent.getIntExtra("mealId", 1);
-        // rv_products
-        rv_products.setLayoutManager(new GridLayoutManager(this, 2));
-        MainAdapter = new MealPlanAdapter(this);
-        rv_products.setAdapter(MainAdapter);
-        // rv_selected_products
-        rv_selected_products.setLayoutManager(new GridLayoutManager(this, 3));
-        NestedAdapter = new MealPlanNestedAdapter(getApplicationContext(), this);
+    private void selectedListDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View view = getLayoutInflater().inflate(R.layout.selected_products_dialog, null);
+        rv_selected_products = view.findViewById(R.id.rv_selected_products2);
+        rv_selected_products.setLayoutManager(new LinearLayoutManager(this));
         rv_selected_products.setAdapter(NestedAdapter);
-    }
-
-    private void SaveMeal() {
-        String list = " ";
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View view = getLayoutInflater().inflate(R.layout.dialog_meal_done, null);
-        TextView textView = view.findViewById(R.id.tv_dialog_meal_done);
-        if (getTitle() == null) {
-            setMealTitle();
-        }
-        textView.setText(list);
         builder.setView(view)
+                .setTitle("Selected product")
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        viewModel.InsertMeal(new MealEntity(mealTitle, getTitle().toString()));
-                        Intent intent = new Intent(getApplicationContext(), WeekActivity.class);
-                        startActivity(intent);
-                        finish();
+
                     }
                 })
                 .create()
                 .show();
-
-    }
-
-    private void setMealTitle() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View view = getLayoutInflater().inflate(R.layout.dialog_meal_title, null);
-        final TextInputEditText editText = view.findViewById(R.id.editText_mealTitle);
-        builder.setView(view)
-                .setTitle(mealTitle)
-                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        getSupportActionBar().setTitle(editText.getText().toString());
-                    }
-                })
-                .setNegativeButton("no", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(MealPlanActivity.this, "no", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .create()
-                .show();
-
-    }
-
-    private void addProductManually() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View view = getLayoutInflater().inflate(R.layout.dialog_meal_title, null);
-        final TextInputEditText editText = view.findViewById(R.id.editText_mealTitle);
-        builder.setView(view)
-                .setTitle("add product")
-                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String s = editText.getText().toString();
-                        //Todo : edit e_product(s,10,10) with real values
-                        ProductEntity product_main = new ProductEntity(s, 10, 10);
-                        viewModel.InsertProduct(product_main);
-//                        selectedProductsList.add(e_product_main);
-//                        rv_selected_products.setAdapter(mealPlanNestedAdapter);
-//                        product_id_catch = product_main.getProductId();
-//                        Toast.makeText(MealPlanActivity.this, String.valueOf(receivedMealId) + " " + product_id_catch, Toast.LENGTH_SHORT).show();
-
-
-                    }
-                })
-                .setNegativeButton("no", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(MealPlanActivity.this, "no", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .create()
-                .show();
-
-
     }
 
 
@@ -180,14 +127,56 @@ public class MealPlanActivity extends AppCompatActivity implements mOnClickListe
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.save_meal:
-                SaveMeal();
-                break;
             case R.id.edit_meal_title:
-                setMealTitle();
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                View view = getLayoutInflater().inflate(R.layout.dialog_meal_title, null);
+                final TextInputEditText editText = view.findViewById(R.id.editText_mealTitle);
+                builder.setView(view)
+                        .setTitle(mealTitle)
+                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                getSupportActionBar().setTitle(editText.getText().toString());
+                            }
+                        })
+                        .setNegativeButton("no", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(MealPlanActivity.this, "no", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .create()
+                        .show();
                 break;
             case R.id.add_new_product:
-                addProductManually();
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+                View view2 = getLayoutInflater().inflate(R.layout.dialog_meal_title, null);
+                final TextInputEditText editText2 = view2.findViewById(R.id.editText_mealTitle);
+                builder2.setView(view2)
+                        .setTitle("add product")
+                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String s = editText2.getText().toString();
+                                //Todo : edit e_product(s,10,10) with real values
+                                ProductEntity product_main = new ProductEntity(s, 10, 10);
+                                viewModel.InsertProduct(product_main);
+//                        selectedProductsList.add(e_product_main);
+//                        rv_selected_products.setAdapter(mealPlanNestedAdapter);
+//                        product_id_catch = product_main.getProductId();
+//                        Toast.makeText(MealPlanActivity.this, String.valueOf(receivedMealId) + " " + product_id_catch, Toast.LENGTH_SHORT).show();
+
+
+                            }
+                        })
+                        .setNegativeButton("no", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(MealPlanActivity.this, "no", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .create()
+                        .show();
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -200,7 +189,6 @@ public class MealPlanActivity extends AppCompatActivity implements mOnClickListe
         viewModel.InsertMealProduct(mealProductXRefEntity);
 
     }
-
 
     @Override
     public void delete_click(int position) {

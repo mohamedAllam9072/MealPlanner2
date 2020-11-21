@@ -6,18 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import allam9072.mealplanner.DB.m_Tables.MealEntity;
-import allam9072.mealplanner.DB.m_Tables.MealProductsRelation;
 import allam9072.mealplanner.DB.m_Tables.ProductEntity;
 import allam9072.mealplanner.R;
 import allam9072.mealplanner.ui.planMeal.MealPlanActivity;
@@ -48,20 +45,21 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.mVH> {
     public void onBindViewHolder(@NonNull final NestedAdapter.mVH holder, final int position) {
 
         holder.tv_mealTitle.setText(meals.get(position).getMeal_name());
+        holder.tv_mealProducts.setText("time");
 
-        viewModel.getMealProducts(meals.get(position).getMealId())
-                .observe(lifecycleOwner, new Observer<List<MealProductsRelation>>() {
-                    @Override
-                    public void onChanged(List<MealProductsRelation> mealProducts) {
-                        setProducts(mealProducts.get(0).products);
-                        String s = " ";
-                        for (int i = 0; i < products.size(); i++) {
-                            s += products.get(i).getProduct_name() + " ";
-
-                        }
-                        holder.tv_mealProducts.setText(s);
-                    }
-                });
+//        viewModel.getMealProducts(meals.get(position).getMealId())
+//                .observe(lifecycleOwner, new Observer<List<MealProductsRelation>>() {
+//                    @Override
+//                    public void onChanged(List<MealProductsRelation> mealProducts) {
+//                        setProducts(mealProducts.get(0).products);
+//                        String s = " ";
+//                        for (int i = 0; i < products.size(); i++) {
+//                            s += products.get(i).getProduct_name() + " ";
+//
+//                        }
+//                        holder.tv_mealProducts.setText(s);
+//                    }
+//                });
 
 
 
@@ -100,7 +98,6 @@ public class NestedAdapter extends RecyclerView.Adapter<NestedAdapter.mVH> {
                     intent.putExtra("mealId", meals.get(getAdapterPosition()).getMealId());
                     intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
-                    Toast.makeText(context, " NestedAdapter", Toast.LENGTH_SHORT).show();
                 }
             });
 

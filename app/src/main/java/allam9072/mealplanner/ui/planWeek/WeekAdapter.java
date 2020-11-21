@@ -47,7 +47,6 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.mVH> {
     @Override
     public void onBindViewHolder(@NonNull final mVH holder, final int position) {
         holder.tv_DayTitle.setText(weekDays.get(position).getDay_name());
-        holder.tv_DayDate.setText("" + weekDays.get(position).getDayId());
         viewModel.getDayMeals(weekDays.get(position).getDayId())
                 .observe(lifecycleOwner, new Observer<List<DayMealsRelation>>() {
                     @Override
@@ -96,13 +95,12 @@ public class WeekAdapter extends RecyclerView.Adapter<WeekAdapter.mVH> {
     }
 
     public class mVH extends RecyclerView.ViewHolder {
-        TextView tv_DayTitle, tv_DayDate;
+        TextView tv_DayTitle;
         RecyclerView nested_rv;
         ImageButton btn_add_new_meal;
 
         public mVH(@NonNull final View itemView) {
             super(itemView);
-            tv_DayDate = itemView.findViewById(R.id.tv_dayDate_f);
             tv_DayTitle = itemView.findViewById(R.id.tv_dayTitle_f);
             btn_add_new_meal = itemView.findViewById(R.id.btn_add_new_meal_f);
             btn_add_new_meal.setOnClickListener(new View.OnClickListener() {

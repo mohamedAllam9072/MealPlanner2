@@ -4,12 +4,14 @@ import android.app.Application;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
 import allam9072.mealplanner.DB.m_Dao.dao_day;
 import allam9072.mealplanner.DB.m_Dao.dao_meal;
 import allam9072.mealplanner.DB.m_Dao.dao_product;
+import allam9072.mealplanner.DB.m_Dao.dao_recipes;
 import allam9072.mealplanner.DB.m_Dao.dao_week;
 import allam9072.mealplanner.DB.m_Tables.DayEntity;
 import allam9072.mealplanner.DB.m_Tables.DayMealsRelation;
@@ -26,12 +28,14 @@ public class Repo {
     private dao_day dao_day;
     private dao_meal dao_meal;
     private dao_product dao_product;
+    private dao_recipes dao_recipes;
 
     private LiveData<List<WeekEntity>> allWeeks;
     private LiveData<List<DayEntity>> allDays;
     private LiveData<List<MealEntity>> allMeals;
     private LiveData<List<ProductEntity>> allProducts;
     private LiveData<List<MealProductsRelation>> mealProducts;
+    private MutableLiveData<List<Recipes>> recipes_list;
 
     private LiveData<List<WeekDaysRelation>> weekDays;
     private LiveData<List<DayMealsRelation>> dayMeals;
@@ -44,6 +48,7 @@ public class Repo {
         dao_day = m_dataBase.dao_day();
         dao_meal = m_dataBase.dao_meal();
         dao_product = m_dataBase.dao_product();
+
 
         allWeeks = dao_week.getAllWeeks();
         allDays = dao_day.getAllDays();
@@ -58,6 +63,10 @@ public class Repo {
     /*** insert methods****************************************************************************************************/
     public void insert_week(WeekEntity weekEntity) {
         new InsertWeekAsyncTask(dao_week).execute(weekEntity);
+    }
+
+    public void insert_recipes(Recipes recipes) {
+        new InsertRecipesAsyncTask(dao_recipes).execute(recipes);
     }
 
     public void insert_day(DayEntity dayEntity) {
@@ -76,6 +85,7 @@ public class Repo {
         new InsertMealProductAsyncTask(dao_meal).execute(mealProductXRefEntity);
     }
 
+
     /*** delete methods****************************************************************************************************/
     public void delete_meal(MealEntity mealEntity) {
         new DeleteMealAsyncTask(dao_meal).execute(mealEntity);
@@ -93,6 +103,10 @@ public class Repo {
     /*** get methods****************************************************************************************************/
     public LiveData<List<WeekEntity>> getAllWeeks() {
         return allWeeks;
+    }
+
+    public LiveData<List<Recipes>> getRecipes_list() {
+        return recipes_list;
     }
 
     public LiveData<List<DayEntity>> getAllDays() {
@@ -197,6 +211,20 @@ public class Repo {
         @Override
         protected Void doInBackground(DayMealsXRefEntity... DayMealsXRefs) {
             dao_day.insertDayMeals(DayMealsXRefs[0]);
+            return null;
+        }
+    }
+
+    private static class InsertRecipesAsyncTask extends AsyncTask<Recipes, Void, Void> {
+        private dao_recipes dao_recipes;
+
+        private InsertRecipesAsyncTask(dao_recipes dao_recipes) {
+            this.dao_recipes = dao_recipes;
+        }
+
+        @Override
+        protected Void doInBackground(Recipes... recipes) {
+            dao_recipes.insert(recipes[0]);
             return null;
         }
     }

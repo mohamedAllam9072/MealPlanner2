@@ -12,6 +12,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import allam9072.mealplanner.DB.m_Dao.dao_day;
 import allam9072.mealplanner.DB.m_Dao.dao_meal;
 import allam9072.mealplanner.DB.m_Dao.dao_product;
+import allam9072.mealplanner.DB.m_Dao.dao_recipes;
 import allam9072.mealplanner.DB.m_Dao.dao_week;
 import allam9072.mealplanner.DB.m_Tables.DayEntity;
 import allam9072.mealplanner.DB.m_Tables.DayMealsXRefEntity;
@@ -21,7 +22,7 @@ import allam9072.mealplanner.DB.m_Tables.ProductEntity;
 import allam9072.mealplanner.DB.m_Tables.WeekDaysXRefEntity;
 import allam9072.mealplanner.DB.m_Tables.WeekEntity;
 
-@Database(entities = {WeekEntity.class, DayEntity.class, MealEntity.class, ProductEntity.class,
+@Database(entities = { WeekEntity.class, DayEntity.class, MealEntity.class, ProductEntity.class,
         MealProductXRefEntity.class, DayMealsXRefEntity.class, WeekDaysXRefEntity.class}, version = 1, exportSchema = false)
 public abstract class m_DataBase extends RoomDatabase {
     public abstract dao_week dao_week();
@@ -156,7 +157,6 @@ public abstract class m_DataBase extends RoomDatabase {
             dao_week.insertWeekDays(new WeekDaysXRefEntity(3, 5));
             dao_week.insertWeekDays(new WeekDaysXRefEntity(3, 6));
             dao_week.insertWeekDays(new WeekDaysXRefEntity(3, 7));
-
 
 
             return null;
