@@ -82,10 +82,24 @@
                 android:layout_gravity="center"
                 android:background="@color/BLUE"
                 android:contentDescription="@string/todo"
-                android:src="@drawable/ic_view_week" />
+                android:src="@drawable/ic_shopping_cart" />
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_recipes_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_8"
+        android:gravity="start"
+        android:text="      Recipes"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/set1_4"
+        android:textStyle="italic"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/d3" />
 
 
     <!--com.google.android.material.tabs.TabLayout
@@ -140,7 +154,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/d3"
+        app:layout_constraintTop_toBottomOf="@id/tv_recipes_number"
         tools:listitem="@layout/item_rv_frag_home" />
 
 

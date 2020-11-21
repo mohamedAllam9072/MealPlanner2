@@ -117,7 +117,11 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.mVH> imp
                     intent.putExtra("rd_comments", recipes.get(getAdapterPosition()).getComments());
                     intent.putExtra("rd_instructions", recipes.get(getAdapterPosition()).getInstructions());
                     intent.putExtra("rd_ingredients", recipes.get(getAdapterPosition()).getIngredients());
-                    intent.putExtra("rd_tags", recipes.get(getAdapterPosition()).getTags());
+                    intent.putExtra("rd_tag1", recipes.get(getAdapterPosition()).getTag1());
+                    intent.putExtra("rd_tag2", recipes.get(getAdapterPosition()).getTag2());
+                    intent.putExtra("rd_tag3", recipes.get(getAdapterPosition()).getTag3());
+                    intent.putExtra("rd_tag4", recipes.get(getAdapterPosition()).getTag4());
+                    intent.putExtra("rd_tag5", recipes.get(getAdapterPosition()).getTag5());
 
                     intent.putExtra("rd_prep_time", recipes.get(getAdapterPosition()).getPreptime());
                     intent.putExtra("rd_cook_time", recipes.get(getAdapterPosition()).getCooktime());
